@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "com.greewsraces.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "PlayerEntityMixin",
+    "MiningSpeedMixin"
+  ],
+  "client": [
+    "PlayerListEntryMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

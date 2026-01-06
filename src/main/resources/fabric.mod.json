@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "greewsraces",
+  "version": "${version}",
+  "name": "Greews Races",
+  "description": "Basic race selection mod for MC fabric",
+  "authors": [
+    "Greews"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+  "license": "MIT",
+  "icon": "assets/greewsraces/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.greewsraces.GreewsRaces"
+    ],
+    "client": [
+      "com.greewsraces.GreewsRacesClient"
+    ]
+  },
+  "mixins": [
+    "greewsraces.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "minecraft": "~1.21.10",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
