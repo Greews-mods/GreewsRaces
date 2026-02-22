@@ -1,0 +1,72 @@
+{
+  "temperature": 0.3,
+  "downfall": 0.6,
+  "has_precipitation": true,
+  "effects": {
+    "sky_color": 655381,
+    "fog_color": 1706542,
+    "water_color": 1706542,
+    "water_fog_color": 851991,
+    "foliage_color": 1717024,
+    "grass_color": 1715738,
+    "ambient_sound": "minecraft:ambient.crimson_forest.loop",
+    "mood_sound": {
+      "sound": "minecraft:ambient.crimson_forest.mood",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    },
+    "additions_sound": {
+      "sound": "minecraft:ambient.crimson_forest.additions",
+      "tick_chance": 0.0111
+    }
+  },
+  "spawners": {
+    "monster": [],
+    "creature": [
+      {
+        "type": "minecraft:cow",
+        "weight": 6,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:sheep",
+        "weight": 5,
+        "minCount": 2,
+        "maxCount": 4
+      },
+      {
+        "type": "minecraft:bat",
+        "weight": 15,
+        "minCount": 1,
+        "maxCount": 5
+      }
+    ],
+    "ambient":[],
+    "water_creature": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:patch_grass_normal",
+      "minecraft:patch_tall_grass"
+    ],
+    [
+      "minecraft:trees_taiga"
+    ],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
+}

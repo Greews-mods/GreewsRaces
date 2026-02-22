@@ -116,7 +116,9 @@ public abstract class PlayerEntityMixin {
 
             // === UPÍR ===
             if (race == Race.VAMPIRE) {
-                if (world.isDay() && !player.isSubmergedInWater()) {
+                // V Evernight biomu upír nehoří – je to jejich domov
+                boolean inEvernight = BiomeRegistration.isInEvernightBiome(player);
+                if (!inEvernight && world.isDay() && !player.isSubmergedInWater()) {
                     if (world.isSkyVisible(player.getBlockPos())) {
                         if (!player.hasStatusEffect(net.minecraft.entity.effect.StatusEffects.FIRE_RESISTANCE)) {
                             player.setOnFireFor(2);
