@@ -14,6 +14,8 @@ public class AllRaceIcons {
     public static final RaceIcon WOOD_ELF = register(Race.WOOD_ELF, 200, 0, 64);
     public static final RaceIcon DEMON = register(Race.DEMON, 270, 0, 64);
     public static final RaceIcon VAMPIRE = register(Race.VAMPIRE, 332, 0, 64);
+    public static final RaceIcon GHOUL = register(Race.GHOUL, 392, 0, 64);
+    public static final RaceIcon FAIRY = register(Race.FAIRY, 455, 0, 64);
     
     private static RaceIcon register(Race race, int x, int y, int size) {
         RaceIcon icon = new RaceIcon(race, x, y, size);

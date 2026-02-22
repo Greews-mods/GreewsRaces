@@ -22,11 +22,11 @@ public enum Race {
         0.9,
         1.2,
         20.0,
-        1.0,
+        2.0,
         0x8B4513,
         "Mistr sekery a podzemí",
-        "+20% poškození se sekerou\n+20% rychlost těžení\n+1 brnění",
-        "-20% poškození s mečem\n-20% poškození s lukem\n-10% rychlost pohybu"
+        "+20% poškození se sekerou\n+20% rychlost těžení\n+2 brnění\n+20% dosah",
+        "-20% poškození s mečem\n-20% poškození s lukem\n-10% rychlost pohybu\n-20% výška"
     ),
 
     NIGHT_ELF("Noční Elf",
@@ -45,11 +45,11 @@ public enum Race {
         1.2,
         1.1,
         1.0,
-        20.0,
+        24.0,
         0.0,
         0x00FF00,
         "Mistr luku a lesa",
-        "+20% poškození s lukem\n+10% rychlost pohybu",
+        "+20% HP \n+20% poškození s lukem\n+10% rychlost pohybu",
         "-20% poškození se sekerou\n+20% výška"
     ),
 
@@ -75,6 +75,30 @@ public enum Race {
         "Nestárnoucí lovec krve",
         "+20% poškození se všemi zbraněmi\n30% šance na lifesteal",
         "Hoří na slunci"
+    ),
+
+    GHOUL("Ghůl",
+        1.0,
+        1.0,
+        1.0,
+        20.0,
+        0.0,
+        0x556B2F,
+        "Bytost temnoty a rozkladu",
+        "Může dýchat pod vodou\nHnilobné maso ho nakrmí\nNehoří na slunci",
+        "Může jíst pouze syrové maso"
+    ),
+
+    FAIRY("Víla",
+        0.7,
+        1.1,
+        1.0,
+        20.0,
+        0.0,
+        0xFF69B4,
+        "Lehká bytost přírody",
+        "+10% rychlost pohybu\n+20% poškození s tridentem\n+50% brnění z kožené zbroje\n+20% dosah",
+        "-30% výška\n-20% poškození se sekerou\n-20% poškození s krumpáčem"
     );
 
     private final String displayName;
