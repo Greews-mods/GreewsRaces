@@ -8,29 +8,48 @@ import net.minecraft.client.MinecraftClient;
 
 public class GreewsRacesClient implements ClientModInitializer {
     private static String clientRaceId = "";
-    private static boolean shouldOpenScreen = false;
-    private static int ticksToWait = 0;
+    private static boolean pendingPostLoginScreens;
+    private static int postLoginDelayTicks;
 
     @Override
     public void onInitializeClient() {
+        ClientConfig.load();
         GreewsRaces.LOGGER.info("GreewsRaces client initialized!");
 
-        ClientLanguageStorage.setLanguage(Language.CZECH);
+        ClientPlayNetworking.registerGlobalReceiver(RacesConfigSyncPayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                ClientRaceConfig.applySync(payload.enabledRaceIds(), payload.generateEvernightBiome());
+                GreewsRaces.LOGGER.info("Received race config sync: {} races, evernight={}",
+                    payload.enabledRaceIds().size(), payload.generateEvernightBiome());
+            });
+        });
+
+        ClientPlayNetworking.registerGlobalReceiver(OpenGuiPayload.ID, (payload, context) -> {
+            context.client().execute(() -> {
+                MinecraftClient client = context.client();
+                if (payload.screenKind() == OpenGuiPayload.KIND_LANGUAGE) {
+                    client.setScreen(new LanguageSelectionScreen());
+                } else {
+                    client.setScreen(new RaceSelectionScreen());
+                }
+            });
+        });
 
         ClientPlayNetworking.registerGlobalReceiver(RaceSyncPayload.ID, (payload, context) -> {
             context.client().execute(() -> {
-                clientRaceId = payload.raceId();
+                clientRaceId = payload.raceId() != null ? payload.raceId() : "";
 
                 MinecraftClient client = context.client();
                 if (client.player != null) {
-                    ClientRaceStorage.setRace(client.player.getUuid(), payload.raceId());
+                    ClientRaceStorage.setRace(client.player.getUuid(), clientRaceId);
                 }
 
                 GreewsRaces.LOGGER.info("Received own race sync: {}", clientRaceId);
 
                 if (clientRaceId == null || clientRaceId.isEmpty()) {
-                    shouldOpenScreen = true;
-                    ticksToWait = 20;
+                    schedulePostLoginFlow();
+                } else {
+                    pendingPostLoginScreens = false;
                 }
             });
         });
@@ -45,7 +64,12 @@ public class GreewsRacesClient implements ClientModInitializer {
 
         ClientPlayNetworking.registerGlobalReceiver(PlayerLanguageSyncPayload.ID, (payload, context) -> {
             context.client().execute(() -> {
-                ClientLanguageStorage.setPlayerLanguage(payload.playerId(), Language.fromCode(payload.languageCode()));
+                MinecraftClient c = context.client();
+                if (c.player != null && c.player.getUuid().equals(payload.playerId())) {
+                    ClientLanguageStorage.setServerLanguageCode(payload.languageCode());
+                } else {
+                    ClientLanguageStorage.setPlayerLanguage(payload.playerId(), Language.fromCode(payload.languageCode()));
+                }
                 GreewsRaces.LOGGER.info("Received language sync for player {}: {}",
                     payload.playerId(), payload.languageCode());
             });
@@ -59,23 +83,31 @@ public class GreewsRacesClient implements ClientModInitializer {
         });
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (shouldOpenScreen && client.player != null && client.world != null) {
-                if (ticksToWait > 0) {
-                    ticksToWait--;
-                } else {
-                    if (client.currentScreen == null) {
+            if (client.player == null || client.world == null) {
+                pendingPostLoginScreens = false;
+                clientRaceId = "";
+                return;
+            }
+
+            if (pendingPostLoginScreens && client.currentScreen == null && ClientRaceConfig.hasSync()) {
+                if (postLoginDelayTicks > 0) {
+                    postLoginDelayTicks--;
+                } else if (!hasRace()) {
+                    if (!ClientLanguageStorage.hasServerLanguageChoice()) {
+                        client.setScreen(new LanguageSelectionScreen());
+                        pendingPostLoginScreens = false;
+                    } else {
                         client.setScreen(new RaceSelectionScreen());
-                        shouldOpenScreen = false;
-                        GreewsRaces.LOGGER.info("Opening race selection screen");
+                        pendingPostLoginScreens = false;
                     }
                 }
             }
-
-            if (client.player == null && client.world == null) {
-                shouldOpenScreen = false;
-                clientRaceId = "";
-            }
         });
+    }
+
+    private static void schedulePostLoginFlow() {
+        pendingPostLoginScreens = true;
+        postLoginDelayTicks = 20;
     }
 
     public static String getClientRaceId() {
@@ -86,7 +118,14 @@ public class GreewsRacesClient implements ClientModInitializer {
         return clientRaceId != null && !clientRaceId.isEmpty();
     }
 
+    public static boolean needsRaceSelection() {
+        return !hasRace();
+    }
+
     public static void resetSync() {
         clientRaceId = "";
+        pendingPostLoginScreens = false;
+        postLoginDelayTicks = 0;
+        ClientRaceConfig.reset();
     }
 }

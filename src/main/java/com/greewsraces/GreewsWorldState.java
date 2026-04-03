@@ -55,7 +55,7 @@ public class GreewsWorldState {
     }
     
     public String getLanguage(UUID playerUuid) {
-        return playerLanguages.getOrDefault(playerUuid.toString(), "cs");
+        return playerLanguages.getOrDefault(playerUuid.toString(), "");
     }
     
     public void setLanguage(UUID playerUuid, String languageCode) {

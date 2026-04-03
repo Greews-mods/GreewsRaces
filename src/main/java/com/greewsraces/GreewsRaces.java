@@ -20,6 +20,7 @@ public class GreewsRaces implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        ServerConfig.load();
         LOGGER.info("GreewsRaces mod initialized!");
 
         SpawnGroupHandler.register();
@@ -29,6 +30,8 @@ public class GreewsRaces implements ModInitializer {
         PayloadTypeRegistry.playS2C().register(RaceSyncPayload.ID, RaceSyncPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(PlayerRaceSyncPayload.ID, PlayerRaceSyncPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(PlayerLanguageSyncPayload.ID, PlayerLanguageSyncPayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(RacesConfigSyncPayload.ID, RacesConfigSyncPayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(OpenGuiPayload.ID, OpenGuiPayload.CODEC);
 
         ServerPlayNetworking.registerGlobalReceiver(RaceSelectionPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
@@ -36,6 +39,10 @@ public class GreewsRaces implements ModInitializer {
                 World world = player.getEntityWorld();
 
                 if (world instanceof ServerWorld serverWorld) {
+                    if (!ServerConfig.isRaceEnabled(payload.raceId())) {
+                        LOGGER.warn("Player {} tried disabled race {}", player.getName().getString(), payload.raceId());
+                        return;
+                    }
                     GreewsWorldState state = GreewsWorldState.get(serverWorld);
                     state.setRace(player.getUuid(), payload.raceId());
 
@@ -75,13 +82,24 @@ public class GreewsRaces implements ModInitializer {
                 String raceId = state.getRace(player.getUuid());
                 String languageCode = state.getLanguage(player.getUuid());
 
+                if (raceId != null && !raceId.isEmpty() && !ServerConfig.isRaceEnabled(raceId)) {
+                    LOGGER.warn("Migrating player {} from disabled race {} to human", player.getName().getString(), raceId);
+                    raceId = Race.HUMAN.getId();
+                    state.setRace(player.getUuid(), raceId);
+                }
+
                 LOGGER.info("Player {} joined, race: {}, language: {}", player.getName().getString(), raceId, languageCode);
 
                 if (raceId != null && !raceId.isEmpty()) {
                     RaceHandler.applyRaceAttributes(player, raceId);
                 }
 
+                ServerPlayNetworking.send(player, new RacesConfigSyncPayload(
+                    ServerConfig.enabledRaceIds(),
+                    ServerConfig.get().generateEvernightBiome
+                ));
                 ServerPlayNetworking.send(player, new RaceSyncPayload(raceId != null ? raceId : ""));
+                ServerPlayNetworking.send(player, new PlayerLanguageSyncPayload(player.getUuid(), languageCode != null ? languageCode : ""));
 
                 syncAllRacesToPlayer(player);
                 syncAllLanguagesToPlayer(player);

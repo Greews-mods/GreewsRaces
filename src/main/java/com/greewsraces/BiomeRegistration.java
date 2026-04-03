@@ -14,6 +14,10 @@ public class BiomeRegistration implements TerraBlenderApi {
      */
     @Override
     public void onTerraBlenderInitialized() {
+        if (!ServerConfig.get().generateEvernightBiome) {
+            GreewsRaces.LOGGER.info("Evernight biome is disabled in config/greewsraces-server.json — TerraBlender region not registered.");
+            return;
+        }
         Regions.register(new EvernightRegion(
             Identifier.of("greewsraces", "overworld"),
             RegionType.OVERWORLD,

@@ -15,7 +15,8 @@ public class RaceSelectionScreen extends Screen {
 
     public RaceSelectionScreen() {
         super(Text.literal("Race Selection"));
-        this.races = Race.values();
+        Race[] available = ClientRaceConfig.enabledRacesForUi();
+        this.races = available.length > 0 ? available : new Race[] { Race.HUMAN };
     }
 
     @Override
@@ -43,28 +44,6 @@ public class RaceSelectionScreen extends Screen {
                 selectRace(races[currentRaceIndex]);
             }
         ).dimensions(this.width - 110, this.height - 30, 100, 20).build());
-
-        Language currentLang = ClientLanguageStorage.getLanguage();
-        this.addDrawableChild(ButtonWidget.builder(
-            Text.literal(currentLang.getShortCode()), 
-            button -> {
-                // Cyklovat mezi všemi jazyky
-                Language[] langs = Language.values();
-                int currentIndex = 0;
-                for (int i = 0; i < langs.length; i++) {
-                    if (langs[i] == currentLang) {
-                        currentIndex = i;
-                        break;
-                    }
-                }
-                Language newLang = langs[(currentIndex + 1) % langs.length];
-                ClientLanguageStorage.setLanguage(newLang);
-                
-                ClientPlayNetworking.send(new LanguageSelectionPayload(newLang.getCode()));
-                
-                this.clearAndInit();
-            }
-        ).dimensions(this.width - 40, 10, 30, 20).build());
     }
 
     private void selectRace(Race race) {

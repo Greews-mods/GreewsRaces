@@ -11,6 +11,7 @@ public class Translation {
         // ==================== ČEŠTINA ====================
         Map<String, String> cs = new HashMap<>();
         cs.put("select_race", "Vyberte si rasu");
+        cs.put("select_language", "Vyberte jazyk");
         cs.put("select", "Vybrat");
         cs.put("bonuses", "Bonusy:");
         cs.put("maluses", "Nevýhody:");
@@ -61,6 +62,7 @@ public class Translation {
         // ==================== ANGLIČTINA ====================
         Map<String, String> en = new HashMap<>();
         en.put("select_race", "Select your race");
+        en.put("select_language", "Select language");
         en.put("select", "Select");
         en.put("bonuses", "Bonuses:");
         en.put("maluses", "Drawbacks:");
@@ -111,6 +113,7 @@ public class Translation {
         // ==================== ŠPANĚLŠTINA ====================
         Map<String, String> es = new HashMap<>();
         es.put("select_race", "Selecciona tu raza");
+        es.put("select_language", "Seleccionar idioma");
         es.put("select", "Seleccionar");
         es.put("bonuses", "Bonificaciones:");
         es.put("maluses", "Desventajas:");
@@ -161,6 +164,7 @@ public class Translation {
         // ==================== RUŠTINA ====================
         Map<String, String> ru = new HashMap<>();
         ru.put("select_race", "Выберите расу");
+        ru.put("select_language", "Выберите язык");
         ru.put("select", "Выбрать");
         ru.put("bonuses", "Бонусы:");
         ru.put("maluses", "Недостатки:");
