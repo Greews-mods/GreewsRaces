@@ -53,6 +53,12 @@ public final class ClientConfig {
     }
 
     public static final class Data {
+        /** Bump when adding/removing fields so older files can be migrated later. */
         public int version = 1;
+
+        /**
+         * If true, show the {@code [Race]} prefix before player names in the tab list (client-side).
+         */
+        public boolean showRaceTabPrefix = true;
     }
 }

@@ -22,7 +22,8 @@
     }
   },
   "spawners": {
-    "monster": [],
+    "ambient": [],
+    "axolotls": [],
     "creature": [
       {
         "type": "minecraft:cow",
@@ -43,11 +44,11 @@
         "maxCount": 5
       }
     ],
-    "ambient": [],
-    "water_creature": [],
+    "misc": [],
+    "monster": [],
     "underground_water_creature": [],
     "water_ambient": [],
-    "misc": []
+    "water_creature": []
   },
   "spawn_costs": {},
   "carvers": [],
