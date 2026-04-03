@@ -18,7 +18,7 @@ public class RaceHandler {
         resetAttributes(player);
 
         // === MAX HEALTH ===
-        EntityAttributeInstance healthAttr = player.getAttributeInstance(EntityAttributes.MAX_HEALTH);
+        EntityAttributeInstance healthAttr = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
         if (healthAttr != null && race.getMaxHealth() != 20.0) {
             healthAttr.addTemporaryModifier(new EntityAttributeModifier(
                 RACE_MODIFIER_ID,
@@ -28,7 +28,7 @@ public class RaceHandler {
         }
 
         // === POHYB ===
-        EntityAttributeInstance speedAttr = player.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED);
+        EntityAttributeInstance speedAttr = player.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
         if (speedAttr != null && race.getWalkSpeed() != 1.0) {
             speedAttr.addTemporaryModifier(new EntityAttributeModifier(
                 RACE_MODIFIER_ID,
@@ -38,7 +38,7 @@ public class RaceHandler {
         }
 
         // === BRNĚNÍ ===
-        EntityAttributeInstance armorAttr = player.getAttributeInstance(EntityAttributes.ARMOR);
+        EntityAttributeInstance armorAttr = player.getAttributeInstance(EntityAttributes.GENERIC_ARMOR);
         if (armorAttr != null && race.getArmor() != 0) {
             armorAttr.addTemporaryModifier(new EntityAttributeModifier(
                 RACE_MODIFIER_ID,
@@ -50,7 +50,7 @@ public class RaceHandler {
         // === SCALE (výška/velikost) ===
         // heightScale: 1.0 = normální, 0.8 = trpaslík (-20%), 0.6 = víla (-40%), 1.2 = elfové (+20%)
         // ADD_MULTIPLIED_BASE: přidáme (scale - 1.0) jako násobek základu
-        EntityAttributeInstance scaleAttr = player.getAttributeInstance(EntityAttributes.SCALE);
+        EntityAttributeInstance scaleAttr = player.getAttributeInstance(EntityAttributes.GENERIC_SCALE);
         if (scaleAttr != null && race.getHeightScale() != 1.0) {
             scaleAttr.addTemporaryModifier(new EntityAttributeModifier(
                 RACE_SCALE_ID,
@@ -70,7 +70,7 @@ public class RaceHandler {
     }
 
     private static void applyReachBonus(PlayerEntity player, double multiplierBonus) {
-        EntityAttributeInstance blockReach = player.getAttributeInstance(EntityAttributes.BLOCK_INTERACTION_RANGE);
+        EntityAttributeInstance blockReach = player.getAttributeInstance(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE);
         if (blockReach != null) {
             blockReach.addTemporaryModifier(new EntityAttributeModifier(
                 RACE_REACH_ID,
@@ -79,7 +79,7 @@ public class RaceHandler {
             ));
         }
 
-        EntityAttributeInstance entityReach = player.getAttributeInstance(EntityAttributes.ENTITY_INTERACTION_RANGE);
+        EntityAttributeInstance entityReach = player.getAttributeInstance(EntityAttributes.PLAYER_ENTITY_INTERACTION_RANGE);
         if (entityReach != null) {
             entityReach.addTemporaryModifier(new EntityAttributeModifier(
                 RACE_REACH_ID,
@@ -90,24 +90,24 @@ public class RaceHandler {
     }
 
     public static void resetAttributes(PlayerEntity player) {
-        EntityAttributeInstance healthAttr = player.getAttributeInstance(EntityAttributes.MAX_HEALTH);
+        EntityAttributeInstance healthAttr = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
         if (healthAttr != null) healthAttr.removeModifier(RACE_MODIFIER_ID);
 
-        EntityAttributeInstance speedAttr = player.getAttributeInstance(EntityAttributes.MOVEMENT_SPEED);
+        EntityAttributeInstance speedAttr = player.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
         if (speedAttr != null) speedAttr.removeModifier(RACE_MODIFIER_ID);
 
-        EntityAttributeInstance armorAttr = player.getAttributeInstance(EntityAttributes.ARMOR);
+        EntityAttributeInstance armorAttr = player.getAttributeInstance(EntityAttributes.GENERIC_ARMOR);
         if (armorAttr != null) armorAttr.removeModifier(RACE_MODIFIER_ID);
 
         // Reset scale
-        EntityAttributeInstance scaleAttr = player.getAttributeInstance(EntityAttributes.SCALE);
+        EntityAttributeInstance scaleAttr = player.getAttributeInstance(EntityAttributes.GENERIC_SCALE);
         if (scaleAttr != null) scaleAttr.removeModifier(RACE_SCALE_ID);
 
         // Reset dosahu
-        EntityAttributeInstance blockReach = player.getAttributeInstance(EntityAttributes.BLOCK_INTERACTION_RANGE);
+        EntityAttributeInstance blockReach = player.getAttributeInstance(EntityAttributes.PLAYER_BLOCK_INTERACTION_RANGE);
         if (blockReach != null) blockReach.removeModifier(RACE_REACH_ID);
 
-        EntityAttributeInstance entityReach = player.getAttributeInstance(EntityAttributes.ENTITY_INTERACTION_RANGE);
+        EntityAttributeInstance entityReach = player.getAttributeInstance(EntityAttributes.PLAYER_ENTITY_INTERACTION_RANGE);
         if (entityReach != null) entityReach.removeModifier(RACE_REACH_ID);
 
         if (player.getHealth() > player.getMaxHealth()) {

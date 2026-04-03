@@ -32,9 +32,7 @@ public abstract class TridentDamageMixin {
                     Entity target = result.getEntity();
                     if (!player.getEntityWorld().isClient()) {
                         ServerWorld serverWorld = (ServerWorld) player.getEntityWorld();
-                        // +20% bonus damage (base trident damage ~8, bonus = 1.6)
                         target.damage(
-                            serverWorld,
                             serverWorld.getDamageSources().thrown(trident, player),
                             1.6f
                         );

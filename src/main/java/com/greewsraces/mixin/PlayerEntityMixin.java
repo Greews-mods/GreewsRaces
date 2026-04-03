@@ -49,7 +49,7 @@ public abstract class PlayerEntityMixin {
     }
 
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
-    private void onDamage(ServerWorld world, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    private void onDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
         if (PlayerDataManager.hasRaceSelected(player)) {
@@ -100,7 +100,6 @@ public abstract class PlayerEntityMixin {
 
         if (!world.isClient() && PlayerDataManager.hasRaceSelected(player)) {
             Race race = Race.fromId(PlayerDataManager.getRace(player));
-            ServerWorld serverWorld = (ServerWorld) world;
 
             // === DÉMON ===
             if (race == Race.DEMON) {
@@ -109,7 +108,7 @@ public abstract class PlayerEntityMixin {
                 }
                 if (player.isSubmergedInWater() || player.isTouchingWaterOrRain()) {
                     if (player.age % 20 == 0) {
-                        player.damage(serverWorld, world.getDamageSources().drown(), 1.0f);
+                        player.damage(world.getDamageSources().drown(), 1.0f);
                     }
                 }
             }
@@ -136,7 +135,7 @@ public abstract class PlayerEntityMixin {
 
             // === NOČNÍ ELF – rychlost v noci ===
             if (race == Race.NIGHT_ELF) {
-                var speedAttr = player.getAttributeInstance(net.minecraft.entity.attribute.EntityAttributes.MOVEMENT_SPEED);
+                var speedAttr = player.getAttributeInstance(net.minecraft.entity.attribute.EntityAttributes.GENERIC_MOVEMENT_SPEED);
                 if (speedAttr != null) {
                     double baseSpeed = 0.10000000149011612;
                     double currentBase = speedAttr.getBaseValue();
@@ -186,7 +185,7 @@ public abstract class PlayerEntityMixin {
         }
 
         var armorAttr = player.getAttributeInstance(
-            net.minecraft.entity.attribute.EntityAttributes.ARMOR);
+            net.minecraft.entity.attribute.EntityAttributes.GENERIC_ARMOR);
         if (armorAttr != null) {
             net.minecraft.util.Identifier leatherId =
                 net.minecraft.util.Identifier.of("greewsraces", "fairy_leather_bonus");

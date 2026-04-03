@@ -29,10 +29,10 @@
     "greewsraces.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.18.0",
-    "minecraft": ">=1.21.10 <1.22.0",
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
     "java": ">=21",
     "fabric-api": "*",
-    "terrablender": ">=21.10.0 <22.0.0"
+    "terrablender": ">=4.1.0"
   }
 }

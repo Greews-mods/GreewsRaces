@@ -166,10 +166,9 @@ public class RaceSelectionScreen extends Screen {
         
         try {
             context.drawTexture(
-                net.minecraft.client.gl.RenderPipelines.GUI_TEXTURED,
                 RaceIcon.SPRITE_SHEET,
                 x, y,
-                (float) icon.getX(), (float) icon.getY(),
+                icon.getX(), icon.getY(),
                 size, size,
                 384, 64
             );

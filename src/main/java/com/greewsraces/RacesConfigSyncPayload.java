@@ -16,7 +16,7 @@ public record RacesConfigSyncPayload(List<String> enabledRaceIds, boolean genera
 
     public static final PacketCodec<RegistryByteBuf, RacesConfigSyncPayload> CODEC = PacketCodec.tuple(
         PacketCodecs.collection(ArrayList::new, PacketCodecs.STRING), RacesConfigSyncPayload::enabledRaceIds,
-        PacketCodecs.BOOLEAN, RacesConfigSyncPayload::generateEvernightBiome,
+        PacketCodecs.BOOL, RacesConfigSyncPayload::generateEvernightBiome,
         RacesConfigSyncPayload::new
     );
 

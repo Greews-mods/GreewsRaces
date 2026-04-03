@@ -1,53 +1,28 @@
 {
-  "attributes": {
-    "minecraft:audio/ambient_sounds": {
-      "additions": {
-        "sound": "minecraft:ambient.crimson_forest.additions",
-        "tick_chance": 0.0111
-      },
-      "loop": "minecraft:ambient.crimson_forest.loop",
-      "mood": {
-        "block_search_extent": 8,
-        "offset": 2.0,
-        "sound": "minecraft:ambient.crimson_forest.mood",
-        "tick_delay": 6000
-      }
-    },
-    "minecraft:visual/fog_color": "#1a0a2e",
-    "minecraft:visual/sky_color": "#0a0015",
-    "minecraft:visual/water_fog_color": "#0d0017"
-  },
-  "carvers": [],
+  "temperature": 0.3,
   "downfall": 0.6,
-  "effects": {
-    "dry_foliage_color": "#1a3320",
-    "foliage_color": "#1a3320",
-    "grass_color": "#1a2e1a",
-    "water_color": "#1a0a2e"
-  },
-  "features": [
-    [],
-    [],
-    [],
-    [],
-    [
-      "minecraft:patch_grass_normal",
-      "minecraft:patch_tall_grass"
-    ],
-    [
-      "minecraft:trees_taiga"
-    ],
-    [],
-    [],
-    [],
-    [],
-    []
-  ],
   "has_precipitation": true,
-  "spawn_costs": {},
+  "effects": {
+    "sky_color": 655381,
+    "fog_color": 1706542,
+    "water_color": 1706542,
+    "water_fog_color": 851991,
+    "foliage_color": 1717024,
+    "grass_color": 1715738,
+    "ambient_sound": "minecraft:ambient.crimson_forest.loop",
+    "mood_sound": {
+      "sound": "minecraft:ambient.crimson_forest.mood",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    },
+    "additions_sound": {
+      "sound": "minecraft:ambient.crimson_forest.additions",
+      "tick_chance": 0.0111
+    }
+  },
   "spawners": {
-    "ambient": [],
-    "axolotls": [],
+    "monster": [],
     "creature": [
       {
         "type": "minecraft:cow",
@@ -68,11 +43,30 @@
         "maxCount": 5
       }
     ],
-    "misc": [],
-    "monster": [],
+    "ambient": [],
+    "water_creature": [],
     "underground_water_creature": [],
     "water_ambient": [],
-    "water_creature": []
+    "misc": []
   },
-  "temperature": 0.3
+  "spawn_costs": {},
+  "carvers": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:patch_grass_normal",
+      "minecraft:patch_tall_grass"
+    ],
+    [
+      "minecraft:trees_taiga"
+    ],
+    [],
+    [],
+    [],
+    [],
+    []
+  ]
 }
