@@ -6,22 +6,11 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.command.permission.LeveledPermissionPredicate;
-import net.minecraft.command.permission.PermissionLevel;
-import net.minecraft.command.permission.PermissionPredicate;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class RaceCommand {
-
-    private static boolean hasPermissionLevel2(ServerCommandSource source) {
-        PermissionPredicate p = source.getPermissions();
-        if (p instanceof LeveledPermissionPredicate leveled) {
-            return leveled.getLevel().isAtLeast(PermissionLevel.fromLevel(2));
-        }
-        return p == PermissionPredicate.ALL;
-    }
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher,
                                CommandRegistryAccess registryAccess,
@@ -29,7 +18,7 @@ public class RaceCommand {
 
         dispatcher.register(CommandManager.literal("race")
             .then(CommandManager.literal("menu")
-                .requires(RaceCommand::hasPermissionLevel2)
+                .requires(source -> source.hasPermissionLevel(2))
                 .executes(RaceCommand::openRaceMenuSelf)
                 .then(CommandManager.argument("player", EntityArgumentType.player())
                     .executes(RaceCommand::openRaceMenuTarget)))
