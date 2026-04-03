@@ -60,3 +60,16 @@ jar {
         rename { "${it}_${project.archives_base_name}" }
     }
 }
+
+// Copy remapped JAR to Desktop so parallel version builds do not overwrite each other
+def mcBuildsRoot = file('C:/Users/farda/Desktop/MC builds/GreewsRaces')
+
+tasks.register('copyToMcBuilds', Copy) {
+    dependsOn remapJar
+    def outJar = layout.buildDirectory.file("libs/${archives_base_name}-${version}.jar").get().asFile
+    from outJar
+    into file("${mcBuildsRoot}/${minecraft_version}")
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+build.finalizedBy copyToMcBuilds
