@@ -161,6 +161,210 @@ public class Translation {
         translations.put("es", es);
 
 
+        // ==================== NĚMČINA ====================
+        Map<String, String> de = new HashMap<>();
+        de.put("select_race", "Wähle deine Rasse");
+        de.put("select_language", "Sprache wählen");
+        de.put("select", "Auswählen");
+        de.put("bonuses", "Boni:");
+        de.put("maluses", "Nachteile:");
+
+        de.put("race.human", "Mensch");
+        de.put("race.human.desc", "Vielseitiger Krieger");
+        de.put("race.human.bonus", "+20% Schaden mit Schwert");
+        de.put("race.human.malus", "Keine besonderen Nachteile");
+
+        de.put("race.dwarf", "Zwerg");
+        de.put("race.dwarf.desc", "Meister der Axt und der Unterwelt");
+        de.put("race.dwarf.bonus", "+20% Schaden mit Axt\n+20% Abbaugeschwindigkeit\n+2 Rüstung\n+20% Reichweite");
+        de.put("race.dwarf.malus", "-20% Schaden mit Schwert\n-20% Schaden mit Bogen\n-10% Bewegungsgeschwindigkeit\n-20% Größe");
+
+        de.put("race.night_elf", "Nachtelf");
+        de.put("race.night_elf.desc", "Schattenbogenschütze");
+        de.put("race.night_elf.bonus", "+20% Schaden mit Armbrust\n+20% Bewegungsgeschwindigkeit bei Nacht");
+        de.put("race.night_elf.malus", "-20% Schaden mit Axt\n-20% Schaden mit Bogen\n+20% Größe");
+
+        de.put("race.wood_elf", "Waldelf");
+        de.put("race.wood_elf.desc", "Meister von Bogen und Wald");
+        de.put("race.wood_elf.bonus", "+20% LP\n+20% Schaden mit Bogen\n+10% Bewegungsgeschwindigkeit");
+        de.put("race.wood_elf.malus", "-20% Schaden mit Axt\n+20% Größe");
+
+        de.put("race.demon", "Dämon");
+        de.put("race.demon.desc", "Herr von Feuer und Zerstörung");
+        de.put("race.demon.bonus", "+20% Schaden mit Schwert\nImmunität gegen Feuer und Lava");
+        de.put("race.demon.malus", "-20% Schaden mit Bogen\n-20% Schaden mit Armbrust\nSchaden durch Wasser und Regen");
+
+        de.put("race.vampire", "Vampir");
+        de.put("race.vampire.desc", "Unsterblicher Blutjäger");
+        de.put("race.vampire.bonus", "+20% Schaden mit allen Waffen\n30% Chance auf Lebensraub");
+        de.put("race.vampire.malus", "Verbrennt im Sonnenlicht");
+
+        de.put("race.ghoul", "Ghul");
+        de.put("race.ghoul.desc", "Wesen der Finsternis und des Verfalls");
+        de.put("race.ghoul.bonus", "Kann unter Wasser atmen\nVerrottetes Fleisch nährt ihn\nVerbrennt nicht in der Sonne");
+        de.put("race.ghoul.malus", "Kann nur rohes Fleisch essen");
+
+        de.put("race.fairy", "Fee");
+        de.put("race.fairy.desc", "Leichtes Wesen der Natur");
+        de.put("race.fairy.bonus", "+10% Bewegungsgeschwindigkeit\n+20% Schaden mit Dreizack\n+50% Rüstung von Lederrüstung\n+20% Reichweite");
+        de.put("race.fairy.malus", "-30% Größe\n-20% Schaden mit Axt\n-20% Schaden mit Spitzhacke");
+
+        translations.put("de", de);
+
+
+        // ==================== POLŠTINA ====================
+        Map<String, String> pl = new HashMap<>();
+        pl.put("select_race", "Wybierz rasę");
+        pl.put("select_language", "Wybierz język");
+        pl.put("select", "Wybierz");
+        pl.put("bonuses", "Bonusy:");
+        pl.put("maluses", "Wady:");
+
+        pl.put("race.human", "Człowiek");
+        pl.put("race.human.desc", "Wszechstronny wojownik");
+        pl.put("race.human.bonus", "+20% obrażeń mieczem");
+        pl.put("race.human.malus", "Brak szczególnych wad");
+
+        pl.put("race.dwarf", "Krasnolud");
+        pl.put("race.dwarf.desc", "Mistrz siekiery i podziemi");
+        pl.put("race.dwarf.bonus", "+20% obrażeń siekierą\n+20% szybkości kopania\n+2 pancerza\n+20% zasięgu");
+        pl.put("race.dwarf.malus", "-20% obrażeń mieczem\n-20% obrażeń łukiem\n-10% szybkości ruchu\n-20% wzrostu");
+
+        pl.put("race.night_elf", "Nocny elf");
+        pl.put("race.night_elf.desc", "Łucznik cieni");
+        pl.put("race.night_elf.bonus", "+20% obrażeń kuszą\n+20% szybkości ruchu w nocy");
+        pl.put("race.night_elf.malus", "-20% obrażeń siekierą\n-20% obrażeń łukiem\n+20% wzrostu");
+
+        pl.put("race.wood_elf", "Leśny elf");
+        pl.put("race.wood_elf.desc", "Mistrz łuku i lasu");
+        pl.put("race.wood_elf.bonus", "+20% HP\n+20% obrażeń łukiem\n+10% szybkości ruchu");
+        pl.put("race.wood_elf.malus", "-20% obrażeń siekierą\n+20% wzrostu");
+
+        pl.put("race.demon", "Demon");
+        pl.put("race.demon.desc", "Władca ognia i zniszczenia");
+        pl.put("race.demon.bonus", "+20% obrażeń mieczem\nOdporność na ogień i lawę");
+        pl.put("race.demon.malus", "-20% obrażeń łukiem\n-20% obrażeń kuszą\nObrażenia od wody i deszczu");
+
+        pl.put("race.vampire", "Wampir");
+        pl.put("race.vampire.desc", "Nieśmiertelny łowca krwi");
+        pl.put("race.vampire.bonus", "+20% obrażeń wszystkimi broniami\n30% szansy na kradzież życia");
+        pl.put("race.vampire.malus", "Płonie w słońcu");
+
+        pl.put("race.ghoul", "Ghul");
+        pl.put("race.ghoul.desc", "Istota ciemności i rozkładu");
+        pl.put("race.ghoul.bonus", "Może oddychać pod wodą\nZgniłe mięso go żywi\nNie płonie w słońcu");
+        pl.put("race.ghoul.malus", "Może jeść tylko surowe mięso");
+
+        pl.put("race.fairy", "Wróżka");
+        pl.put("race.fairy.desc", "Lekka istota natury");
+        pl.put("race.fairy.bonus", "+10% szybkości ruchu\n+20% obrażeń trójzębem\n+50% pancerza ze skórzanej zbroi\n+20% zasięgu");
+        pl.put("race.fairy.malus", "-30% wzrostu\n-20% obrażeń siekierą\n-20% obrażeń kilofem");
+
+        translations.put("pl", pl);
+
+
+        // ==================== SLOVENSKY ====================
+        Map<String, String> sk = new HashMap<>();
+        sk.put("select_race", "Vyberte si rasu");
+        sk.put("select_language", "Vyberte jazyk");
+        sk.put("select", "Vybrať");
+        sk.put("bonuses", "Bonusy:");
+        sk.put("maluses", "Nevýhody:");
+
+        sk.put("race.human", "Človek");
+        sk.put("race.human.desc", "Všestranný bojovník");
+        sk.put("race.human.bonus", "+20% poškodenia mečom");
+        sk.put("race.human.malus", "Žiadne špecifické nevýhody");
+
+        sk.put("race.dwarf", "Trpaslík");
+        sk.put("race.dwarf.desc", "Majster sekery a podzemia");
+        sk.put("race.dwarf.bonus", "+20% poškodenia sekerou\n+20% rýchlosť ťaženia\n+2 brnenie\n+20% dosah");
+        sk.put("race.dwarf.malus", "-20% poškodenia mečom\n-20% poškodenia lukom\n-10% rýchlosť pohybu\n-20% výška");
+
+        sk.put("race.night_elf", "Nočný elf");
+        sk.put("race.night_elf.desc", "Strelec tieňov");
+        sk.put("race.night_elf.bonus", "+20% poškodenia kušou\n+20% rýchlosť pohybu v noci");
+        sk.put("race.night_elf.malus", "-20% poškodenia sekerou\n-20% poškodenia lukom\n+20% výška");
+
+        sk.put("race.wood_elf", "Lesný elf");
+        sk.put("race.wood_elf.desc", "Majster luku a lesa");
+        sk.put("race.wood_elf.bonus", "+20% HP\n+20% poškodenia lukom\n+10% rýchlosť pohybu");
+        sk.put("race.wood_elf.malus", "-20% poškodenia sekerou\n+20% výška");
+
+        sk.put("race.demon", "Démon");
+        sk.put("race.demon.desc", "Pán ohňa a skazy");
+        sk.put("race.demon.bonus", "+20% poškodenia mečom\nImunita voči ohňu a lave");
+        sk.put("race.demon.malus", "-20% poškodenia lukom\n-20% poškodenia kušou\nPoškodenie z vody a dažďa");
+
+        sk.put("race.vampire", "Upír");
+        sk.put("race.vampire.desc", "Nestarnúci lovec krvi");
+        sk.put("race.vampire.bonus", "+20% poškodenia so všetkými zbraňami\n30% šanca na lifesteal");
+        sk.put("race.vampire.malus", "Horí na slnku");
+
+        sk.put("race.ghoul", "Ghúl");
+        sk.put("race.ghoul.desc", "Bytosť temnoty a rozkladu");
+        sk.put("race.ghoul.bonus", "Môže dýchať pod vodou\nHnilé mäso ho nakŕmi\nNehorí na slnku");
+        sk.put("race.ghoul.malus", "Môže jesť len surové mäso");
+
+        sk.put("race.fairy", "Víla");
+        sk.put("race.fairy.desc", "Ľahká bytosť prírody");
+        sk.put("race.fairy.bonus", "+10% rýchlosť pohybu\n+20% poškodenia trojzubcom\n+50% brnenie z koženej zbroje\n+20% dosah");
+        sk.put("race.fairy.malus", "-30% výška\n-20% poškodenia sekerou\n-20% poškodenia krumpáčom");
+
+        translations.put("sk", sk);
+
+
+        // ==================== UKRAJINŠTINA ====================
+        Map<String, String> uk = new HashMap<>();
+        uk.put("select_race", "Оберіть расу");
+        uk.put("select_language", "Оберіть мову");
+        uk.put("select", "Обрати");
+        uk.put("bonuses", "Бонуси:");
+        uk.put("maluses", "Недоліки:");
+
+        uk.put("race.human", "Людина");
+        uk.put("race.human.desc", "Універсальний воїн");
+        uk.put("race.human.bonus", "+20% шкоди мечем");
+        uk.put("race.human.malus", "Без особливих недоліків");
+
+        uk.put("race.dwarf", "Гном");
+        uk.put("race.dwarf.desc", "Майстер сокири та підземелля");
+        uk.put("race.dwarf.bonus", "+20% шкоди сокирою\n+20% швидкість видобутку\n+2 броня\n+20% досяжність");
+        uk.put("race.dwarf.malus", "-20% шкоди мечем\n-20% шкоди луком\n-10% швидкість руху\n-20% зріст");
+
+        uk.put("race.night_elf", "Нічний ельф");
+        uk.put("race.night_elf.desc", "Стрілець тіней");
+        uk.put("race.night_elf.bonus", "+20% шкоди арбалетом\n+20% швидкість руху вночі");
+        uk.put("race.night_elf.malus", "-20% шкоди сокирою\n-20% шкоди луком\n+20% зріст");
+
+        uk.put("race.wood_elf", "Лісовий ельф");
+        uk.put("race.wood_elf.desc", "Майстер лука та лісу");
+        uk.put("race.wood_elf.bonus", "+20% HP\n+20% шкоди луком\n+10% швидкість руху");
+        uk.put("race.wood_elf.malus", "-20% шкоди сокирою\n+20% зріст");
+
+        uk.put("race.demon", "Демон");
+        uk.put("race.demon.desc", "Володар вогню та руйнування");
+        uk.put("race.demon.bonus", "+20% шкоди мечем\nІмунітет до вогню та лави");
+        uk.put("race.demon.malus", "-20% шкоди луком\n-20% шкоди арбалетом\nШкода від води та дощу");
+
+        uk.put("race.vampire", "Вампір");
+        uk.put("race.vampire.desc", "Безсмертний мисливець за кров'ю");
+        uk.put("race.vampire.bonus", "+20% шкоди всією зброєю\n30% шанс вампіризму");
+        uk.put("race.vampire.malus", "Горить на сонці");
+
+        uk.put("race.ghoul", "Гуль");
+        uk.put("race.ghoul.desc", "Істота темряви та розкладу");
+        uk.put("race.ghoul.bonus", "Може дихати під водою\nТухле м'ясо його годує\nНе горить на сонці");
+        uk.put("race.ghoul.malus", "Може їсти лише сире м'ясо");
+
+        uk.put("race.fairy", "Фея");
+        uk.put("race.fairy.desc", "Легка істота природи");
+        uk.put("race.fairy.bonus", "+10% швидкість руху\n+20% шкоди тризубцем\n+50% броня з шкіряної броні\n+20% досяжність");
+        uk.put("race.fairy.malus", "-30% зріст\n-20% шкоди сокирою\n-20% шкоди кайлом");
+
+        translations.put("uk", uk);
+
+
         // ==================== RUŠTINA ====================
         Map<String, String> ru = new HashMap<>();
         ru.put("select_race", "Выберите расу");
