@@ -16,6 +16,9 @@ public abstract class PlayerListEntryMixin {
     
     @Inject(method = "getDisplayName", at = @At("RETURN"), cancellable = true)
     private void addRacePrefixToTab(CallbackInfoReturnable<Text> cir) {
+        if (!ClientConfig.get().showRaceTabPrefix) {
+            return;
+        }
         PlayerListEntry entry = (PlayerListEntry) (Object) this;
         UUID playerId = entry.getProfile().getId();
         
