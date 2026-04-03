@@ -3,7 +3,6 @@ package com.greewsraces;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -25,17 +24,9 @@ public class GreewsRaces implements ModInitializer {
 
         SpawnGroupHandler.register();
 
-        PayloadTypeRegistry.playC2S().register(RaceSelectionPayload.ID, RaceSelectionPayload.CODEC);
-        PayloadTypeRegistry.playC2S().register(LanguageSelectionPayload.ID, LanguageSelectionPayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(RaceSyncPayload.ID, RaceSyncPayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(PlayerRaceSyncPayload.ID, PlayerRaceSyncPayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(PlayerLanguageSyncPayload.ID, PlayerLanguageSyncPayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(RacesConfigSyncPayload.ID, RacesConfigSyncPayload.CODEC);
-        PayloadTypeRegistry.playS2C().register(OpenGuiPayload.ID, OpenGuiPayload.CODEC);
-
-        ServerPlayNetworking.registerGlobalReceiver(RaceSelectionPayload.ID, (payload, context) -> {
-            context.server().execute(() -> {
-                ServerPlayerEntity player = context.player();
+        ServerPlayNetworking.registerGlobalReceiver(RaceSelectionPayload.ID, (server, player, handler, buf, responseSender) -> {
+            RaceSelectionPayload payload = RaceSelectionPayload.read(buf);
+            server.execute(() -> {
                 World world = player.getEntityWorld();
 
                 if (world instanceof ServerWorld serverWorld) {
@@ -50,16 +41,16 @@ public class GreewsRaces implements ModInitializer {
 
                     LOGGER.info("Player {} selected race: {}", player.getName().getString(), payload.raceId());
 
-                    ServerPlayNetworking.send(player, new RaceSyncPayload(payload.raceId()));
+                    RaceSyncPayload.sendTo(player, payload.raceId());
 
                     syncRaceToNearbyPlayers(player, payload.raceId());
                 }
             });
         });
 
-        ServerPlayNetworking.registerGlobalReceiver(LanguageSelectionPayload.ID, (payload, context) -> {
-            context.server().execute(() -> {
-                ServerPlayerEntity player = context.player();
+        ServerPlayNetworking.registerGlobalReceiver(LanguageSelectionPayload.ID, (server, player, handler, buf, responseSender) -> {
+            LanguageSelectionPayload payload = LanguageSelectionPayload.read(buf);
+            server.execute(() -> {
                 World world = player.getEntityWorld();
 
                 if (world instanceof ServerWorld serverWorld) {
@@ -94,12 +85,13 @@ public class GreewsRaces implements ModInitializer {
                     RaceHandler.applyRaceAttributes(player, raceId);
                 }
 
-                ServerPlayNetworking.send(player, new RacesConfigSyncPayload(
+                RacesConfigSyncPayload.sendTo(player, new RacesConfigSyncPayload(
                     ServerConfig.enabledRaceIds(),
                     ServerConfig.get().generateEvernightBiome
                 ));
-                ServerPlayNetworking.send(player, new RaceSyncPayload(raceId != null ? raceId : ""));
-                ServerPlayNetworking.send(player, new PlayerLanguageSyncPayload(player.getUuid(), languageCode != null ? languageCode : ""));
+                RaceSyncPayload.sendTo(player, raceId != null ? raceId : "");
+                PlayerLanguageSyncPayload.sendTo(player, new PlayerLanguageSyncPayload(
+                    player.getUuid(), languageCode != null ? languageCode : ""));
 
                 syncAllRacesToPlayer(player);
                 syncAllLanguagesToPlayer(player);
@@ -155,7 +147,7 @@ public class GreewsRaces implements ModInitializer {
         PlayerLanguageSyncPayload payload = new PlayerLanguageSyncPayload(player.getUuid(), languageCode);
 
         for (ServerPlayerEntity otherPlayer : world.getPlayers()) {
-            ServerPlayNetworking.send(otherPlayer, payload);
+            PlayerLanguageSyncPayload.sendTo(otherPlayer, payload);
         }
 
         LOGGER.info("Synced language {} of player {} to all players", languageCode, player.getName().getString());
@@ -169,7 +161,7 @@ public class GreewsRaces implements ModInitializer {
             String languageCode = state.getLanguage(otherPlayer.getUuid());
             if (languageCode != null && !languageCode.isEmpty()) {
                 PlayerLanguageSyncPayload payload = new PlayerLanguageSyncPayload(otherPlayer.getUuid(), languageCode);
-                ServerPlayNetworking.send(receiver, payload);
+                PlayerLanguageSyncPayload.sendTo(receiver, payload);
             }
         }
 
@@ -182,7 +174,7 @@ public class GreewsRaces implements ModInitializer {
 
         for (ServerPlayerEntity otherPlayer : world.getPlayers()) {
             if (otherPlayer != player) {
-                ServerPlayNetworking.send(otherPlayer, payload);
+                PlayerRaceSyncPayload.sendTo(otherPlayer, payload);
             }
         }
 
@@ -197,7 +189,7 @@ public class GreewsRaces implements ModInitializer {
             if (otherPlayer != player) {
                 double distance = otherPlayer.squaredDistanceTo(player);
                 if (distance < 128 * 128) {
-                    ServerPlayNetworking.send(otherPlayer, payload);
+                    PlayerRaceSyncPayload.sendTo(otherPlayer, payload);
                 }
             }
         }
@@ -214,7 +206,7 @@ public class GreewsRaces implements ModInitializer {
                 String raceId = state.getRace(otherPlayer.getUuid());
                 if (raceId != null && !raceId.isEmpty()) {
                     PlayerRaceSyncPayload payload = new PlayerRaceSyncPayload(otherPlayer.getUuid(), raceId);
-                    ServerPlayNetworking.send(receiver, payload);
+                    PlayerRaceSyncPayload.sendTo(receiver, payload);
                 }
             }
         }

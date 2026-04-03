@@ -3,25 +3,13 @@ package com.greewsraces;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.EntityArgumentType;
-import net.minecraft.command.permission.LeveledPermissionPredicate;
-import net.minecraft.command.permission.PermissionLevel;
-import net.minecraft.command.permission.PermissionPredicate;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 
 public class RaceCommand {
-
-    private static boolean hasPermissionLevel2(ServerCommandSource source) {
-        PermissionPredicate p = source.getPermissions();
-        if (p instanceof LeveledPermissionPredicate leveled) {
-            return leveled.getLevel().isAtLeast(PermissionLevel.fromLevel(2));
-        }
-        return p == PermissionPredicate.ALL;
-    }
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher,
                                CommandRegistryAccess registryAccess,
@@ -29,7 +17,7 @@ public class RaceCommand {
 
         dispatcher.register(CommandManager.literal("race")
             .then(CommandManager.literal("menu")
-                .requires(RaceCommand::hasPermissionLevel2)
+                .requires(source -> source.hasPermissionLevel(2))
                 .executes(RaceCommand::openRaceMenuSelf)
                 .then(CommandManager.argument("player", EntityArgumentType.player())
                     .executes(RaceCommand::openRaceMenuTarget)))
@@ -43,13 +31,13 @@ public class RaceCommand {
         if (!(source.getEntity() instanceof ServerPlayerEntity player)) {
             return 0;
         }
-        ServerPlayNetworking.send(player, new OpenGuiPayload(OpenGuiPayload.KIND_RACE));
+        OpenGuiPayload.sendTo(player, OpenGuiPayload.KIND_RACE);
         return 1;
     }
 
     private static int openRaceMenuTarget(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity target = EntityArgumentType.getPlayer(context, "player");
-        ServerPlayNetworking.send(target, new OpenGuiPayload(OpenGuiPayload.KIND_RACE));
+        OpenGuiPayload.sendTo(target, OpenGuiPayload.KIND_RACE);
         return 1;
     }
 
@@ -58,7 +46,7 @@ public class RaceCommand {
         if (!(source.getEntity() instanceof ServerPlayerEntity player)) {
             return 0;
         }
-        ServerPlayNetworking.send(player, new OpenGuiPayload(OpenGuiPayload.KIND_LANGUAGE));
+        OpenGuiPayload.sendTo(player, OpenGuiPayload.KIND_LANGUAGE);
         return 1;
     }
 }

@@ -3,7 +3,7 @@ package com.greewsraces;
 import net.minecraft.util.Identifier;
 
 public class RaceIcon {
-    public static final Identifier SPRITE_SHEET = Identifier.of("greewsraces", "textures/gui/race_icons.png");
+    public static final Identifier SPRITE_SHEET = new Identifier("greewsraces", "textures/gui/race_icons.png");
     
     private final Race race;
     private final int x;

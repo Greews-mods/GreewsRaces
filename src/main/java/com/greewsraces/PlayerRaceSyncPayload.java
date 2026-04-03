@@ -1,31 +1,31 @@
 package com.greewsraces;
 
-import net.minecraft.network.RegistryByteBuf;
-import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.network.codec.PacketCodecs;
-import net.minecraft.network.packet.CustomPayload;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.Uuids;
 
 import java.util.UUID;
 
 /**
  * Payload pro synchronizaci rasy jiného hráče
- * Používá se pro zobrazení ras ostatních hráčů na klientovi
  */
-public record PlayerRaceSyncPayload(UUID playerId, String raceId) implements CustomPayload {
-    public static final CustomPayload.Id<PlayerRaceSyncPayload> ID = 
-        new CustomPayload.Id<>(Identifier.of(GreewsRaces.MOD_ID, "player_race_sync"));
-    
-    public static final PacketCodec<RegistryByteBuf, PlayerRaceSyncPayload> CODEC = 
-        PacketCodec.tuple(
-            Uuids.PACKET_CODEC, PlayerRaceSyncPayload::playerId,
-            PacketCodecs.STRING, PlayerRaceSyncPayload::raceId,
-            PlayerRaceSyncPayload::new
-        );
-    
-    @Override
-    public Id<? extends CustomPayload> getId() {
-        return ID;
+public record PlayerRaceSyncPayload(UUID playerId, String raceId) {
+    public static final Identifier ID = new Identifier(GreewsRaces.MOD_ID, "player_race_sync");
+
+    public static void sendTo(ServerPlayerEntity player, PlayerRaceSyncPayload payload) {
+        PacketByteBuf buf = PacketByteBufs.create();
+        payload.write(buf);
+        ServerPlayNetworking.send(player, ID, buf);
+    }
+
+    public static PlayerRaceSyncPayload read(PacketByteBuf buf) {
+        return new PlayerRaceSyncPayload(buf.readUuid(), buf.readString());
+    }
+
+    public void write(PacketByteBuf buf) {
+        buf.writeUuid(playerId);
+        buf.writeString(raceId != null ? raceId : "");
     }
 }

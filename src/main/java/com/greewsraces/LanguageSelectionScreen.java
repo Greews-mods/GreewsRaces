@@ -1,6 +1,7 @@
 package com.greewsraces;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -30,7 +31,9 @@ public class LanguageSelectionScreen extends Screen {
     }
 
     private void selectLanguage(Language lang) {
-        ClientPlayNetworking.send(new LanguageSelectionPayload(lang.getCode()));
+        var buf = PacketByteBufs.create();
+        buf.writeString(lang.getCode());
+        ClientPlayNetworking.send(LanguageSelectionPayload.ID, buf);
         ClientLanguageStorage.applyLocalLanguageChoice(lang);
 
         MinecraftClient client = MinecraftClient.getInstance();

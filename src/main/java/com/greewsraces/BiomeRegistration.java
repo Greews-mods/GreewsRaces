@@ -19,7 +19,7 @@ public class BiomeRegistration implements TerraBlenderApi {
             return;
         }
         Regions.register(new EvernightRegion(
-            Identifier.of("greewsraces", "overworld"),
+            new Identifier("greewsraces", "overworld"),
             RegionType.OVERWORLD,
             1
         ));

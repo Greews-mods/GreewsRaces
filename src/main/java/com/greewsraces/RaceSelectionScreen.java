@@ -1,6 +1,7 @@
 package com.greewsraces;
 
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
@@ -47,7 +48,9 @@ public class RaceSelectionScreen extends Screen {
     }
 
     private void selectRace(Race race) {
-        ClientPlayNetworking.send(new RaceSelectionPayload(race.getId()));
+        var buf = PacketByteBufs.create();
+        buf.writeString(race.getId());
+        ClientPlayNetworking.send(RaceSelectionPayload.ID, buf);
         if (this.client != null) {
             this.client.setScreen(null);
         }
@@ -166,10 +169,9 @@ public class RaceSelectionScreen extends Screen {
         
         try {
             context.drawTexture(
-                net.minecraft.client.gl.RenderPipelines.GUI_TEXTURED,
                 RaceIcon.SPRITE_SHEET,
                 x, y,
-                (float) icon.getX(), (float) icon.getY(),
+                icon.getX(), icon.getY(),
                 size, size,
                 384, 64
             );

@@ -12,6 +12,6 @@ public class EvernightBiome {
 
     public static final RegistryKey<Biome> EVERNIGHT = RegistryKey.of(
         RegistryKeys.BIOME,
-        Identifier.of("greewsraces", "evernight")
+        new Identifier("greewsraces", "evernight")
     );
 }

@@ -17,7 +17,7 @@ public abstract class PlayerListEntryMixin {
     @Inject(method = "getDisplayName", at = @At("RETURN"), cancellable = true)
     private void addRacePrefixToTab(CallbackInfoReturnable<Text> cir) {
         PlayerListEntry entry = (PlayerListEntry) (Object) this;
-        UUID playerId = entry.getProfile().id();
+        UUID playerId = entry.getProfile().getId();
         
         if (ClientRaceStorage.hasRace(playerId)) {
             String raceId = ClientRaceStorage.getRace(playerId);
@@ -28,7 +28,7 @@ public abstract class PlayerListEntryMixin {
             
             Text originalName = cir.getReturnValue();
             if (originalName == null) {
-                originalName = Text.literal(entry.getProfile().name());
+                originalName = Text.literal(entry.getProfile().getName());
             }
             
             MutableText prefix = Text.literal("[" + raceName + "] ")

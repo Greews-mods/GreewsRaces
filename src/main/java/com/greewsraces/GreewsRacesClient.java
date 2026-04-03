@@ -16,32 +16,35 @@ public class GreewsRacesClient implements ClientModInitializer {
         ClientConfig.load();
         GreewsRaces.LOGGER.info("GreewsRaces client initialized!");
 
-        ClientPlayNetworking.registerGlobalReceiver(RacesConfigSyncPayload.ID, (payload, context) -> {
-            context.client().execute(() -> {
+        ClientPlayNetworking.registerGlobalReceiver(RacesConfigSyncPayload.ID, (client, handler, buf, responseSender) -> {
+            RacesConfigSyncPayload payload = RacesConfigSyncPayload.read(buf);
+            client.execute(() -> {
                 ClientRaceConfig.applySync(payload.enabledRaceIds(), payload.generateEvernightBiome());
                 GreewsRaces.LOGGER.info("Received race config sync: {} races, evernight={}",
                     payload.enabledRaceIds().size(), payload.generateEvernightBiome());
             });
         });
 
-        ClientPlayNetworking.registerGlobalReceiver(OpenGuiPayload.ID, (payload, context) -> {
-            context.client().execute(() -> {
-                MinecraftClient client = context.client();
+        ClientPlayNetworking.registerGlobalReceiver(OpenGuiPayload.ID, (client, handler, buf, responseSender) -> {
+            OpenGuiPayload payload = OpenGuiPayload.read(buf);
+            client.execute(() -> {
+                MinecraftClient c = client;
                 if (payload.screenKind() == OpenGuiPayload.KIND_LANGUAGE) {
-                    client.setScreen(new LanguageSelectionScreen());
+                    c.setScreen(new LanguageSelectionScreen());
                 } else {
-                    client.setScreen(new RaceSelectionScreen());
+                    c.setScreen(new RaceSelectionScreen());
                 }
             });
         });
 
-        ClientPlayNetworking.registerGlobalReceiver(RaceSyncPayload.ID, (payload, context) -> {
-            context.client().execute(() -> {
+        ClientPlayNetworking.registerGlobalReceiver(RaceSyncPayload.ID, (client, handler, buf, responseSender) -> {
+            RaceSyncPayload payload = RaceSyncPayload.read(buf);
+            client.execute(() -> {
                 clientRaceId = payload.raceId() != null ? payload.raceId() : "";
 
-                MinecraftClient client = context.client();
-                if (client.player != null) {
-                    ClientRaceStorage.setRace(client.player.getUuid(), clientRaceId);
+                MinecraftClient c = client;
+                if (c.player != null) {
+                    ClientRaceStorage.setRace(c.player.getUuid(), clientRaceId);
                 }
 
                 GreewsRaces.LOGGER.info("Received own race sync: {}", clientRaceId);
@@ -54,17 +57,19 @@ public class GreewsRacesClient implements ClientModInitializer {
             });
         });
 
-        ClientPlayNetworking.registerGlobalReceiver(PlayerRaceSyncPayload.ID, (payload, context) -> {
-            context.client().execute(() -> {
+        ClientPlayNetworking.registerGlobalReceiver(PlayerRaceSyncPayload.ID, (client, handler, buf, responseSender) -> {
+            PlayerRaceSyncPayload payload = PlayerRaceSyncPayload.read(buf);
+            client.execute(() -> {
                 ClientRaceStorage.setRace(payload.playerId(), payload.raceId());
                 GreewsRaces.LOGGER.info("Received race sync for player {}: {}",
                     payload.playerId(), payload.raceId());
             });
         });
 
-        ClientPlayNetworking.registerGlobalReceiver(PlayerLanguageSyncPayload.ID, (payload, context) -> {
-            context.client().execute(() -> {
-                MinecraftClient c = context.client();
+        ClientPlayNetworking.registerGlobalReceiver(PlayerLanguageSyncPayload.ID, (client, handler, buf, responseSender) -> {
+            PlayerLanguageSyncPayload payload = PlayerLanguageSyncPayload.read(buf);
+            client.execute(() -> {
+                MinecraftClient c = client;
                 if (c.player != null && c.player.getUuid().equals(payload.playerId())) {
                     ClientLanguageStorage.setServerLanguageCode(payload.languageCode());
                 } else {

@@ -37,7 +37,7 @@ public class SpawnGroupHandler {
                     BlockPos pos = new BlockPos(x, y, z);
                     if (!world.isAir(pos)) continue;
 
-                    BatEntity bat = EntityType.BAT.create(world, SpawnReason.NATURAL);
+                    BatEntity bat = EntityType.BAT.create(world, null, batEntity -> {}, pos, SpawnReason.NATURAL, false, false);
                     if (bat == null) continue;
 
                     bat.refreshPositionAndAngles(pos, 0, 0);
