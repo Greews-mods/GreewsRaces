@@ -1,11 +1,12 @@
 package com.greewsraces;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
 public class ClientLanguageStorage {
-    private static Language currentLanguage = Language.CZECH;
+    private static Language currentLanguage = Language.DEFAULT;
     /** True after the server has a non-empty language code for this player. */
     private static boolean serverLanguageKnown;
     private static final Map<UUID, Language> playerLanguages = new HashMap<>();
@@ -24,7 +25,7 @@ public class ClientLanguageStorage {
     public static void setServerLanguageCode(String code) {
         if (code == null || code.isEmpty()) {
             serverLanguageKnown = false;
-            currentLanguage = Language.CZECH;
+            applyInitialClientLocaleIfNeeded();
         } else {
             serverLanguageKnown = true;
             currentLanguage = Language.fromCode(code);
@@ -33,6 +34,24 @@ public class ClientLanguageStorage {
 
     public static boolean hasServerLanguageChoice() {
         return serverLanguageKnown;
+    }
+
+    /** Uses the Minecraft client language before the player picks a mod language. */
+    public static void applyInitialClientLocaleIfNeeded() {
+        if (!serverLanguageKnown) {
+            currentLanguage = Language.fromMinecraftLocale(detectMinecraftLocale());
+        }
+    }
+
+    private static String detectMinecraftLocale() {
+        try {
+            net.minecraft.client.MinecraftClient client = net.minecraft.client.MinecraftClient.getInstance();
+            if (client != null && client.options != null) {
+                return client.options.language;
+            }
+        } catch (Exception ignored) {
+        }
+        return "";
     }
 
     /** After picking a language on the client before the server echoes sync. */
@@ -46,12 +65,12 @@ public class ClientLanguageStorage {
     }
 
     public static Language getPlayerLanguage(UUID playerId) {
-        return playerLanguages.getOrDefault(playerId, Language.CZECH);
+        return playerLanguages.getOrDefault(playerId, Language.DEFAULT);
     }
 
     public static void clear() {
         playerLanguages.clear();
         serverLanguageKnown = false;
-        currentLanguage = Language.CZECH;
+        currentLanguage = Language.DEFAULT;
     }
 }

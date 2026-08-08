@@ -89,8 +89,6 @@ public class GreewsRacesClient implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.player == null || client.world == null) {
-                pendingPostLoginScreens = false;
-                clientRaceId = "";
                 return;
             }
 
@@ -99,6 +97,7 @@ public class GreewsRacesClient implements ClientModInitializer {
                     postLoginDelayTicks--;
                 } else if (!hasRace()) {
                     if (!ClientLanguageStorage.hasServerLanguageChoice()) {
+                        ClientLanguageStorage.applyInitialClientLocaleIfNeeded();
                         client.setScreen(new LanguageSelectionScreen());
                         pendingPostLoginScreens = false;
                     } else {
