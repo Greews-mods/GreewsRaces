@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -29,7 +30,7 @@ public abstract class PlayerEntityMixin {
             Race race = Race.fromId(PlayerDataManager.getRace(player));
             Text originalName = cir.getReturnValue();
 
-            Language viewerLanguage = Language.CZECH;
+            Language viewerLanguage = Language.DEFAULT;
             if (player.getEntityWorld().isClient()) {
                 viewerLanguage = ClientLanguageStorage.getLanguage();
             }
@@ -71,6 +72,18 @@ public abstract class PlayerEntityMixin {
                 }
             }
         }
+    }
+
+    @ModifyArg(
+        method = "attack",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
+        ),
+        index = 1
+    )
+    private float greewsraces$scaleMeleeDamage(float amount) {
+        return RaceWeaponDamage.multiplyMelee((PlayerEntity) (Object) this, amount);
     }
 
     @Inject(method = "attack", at = @At("HEAD"))

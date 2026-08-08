@@ -9,11 +9,8 @@ public class PlayerDataManager {
     
     public static void setRace(PlayerEntity player, String raceId) {
         if (player instanceof ServerPlayerEntity serverPlayer) {
-            World world = serverPlayer.getEntityWorld();
-            if (world instanceof ServerWorld serverWorld) {
-                GreewsWorldState state = GreewsWorldState.get(serverWorld);
-                state.setRace(player.getUuid(), raceId);
-            }
+            GreewsWorldState state = GreewsWorldState.get(serverPlayer.getServer());
+            state.setRace(player.getUuid(), raceId);
         }
     }
     
@@ -23,11 +20,8 @@ public class PlayerDataManager {
         }
         
         if (player instanceof ServerPlayerEntity serverPlayer) {
-            World world = serverPlayer.getEntityWorld();
-            if (world instanceof ServerWorld serverWorld) {
-                GreewsWorldState state = GreewsWorldState.get(serverWorld);
-                return state.getRace(player.getUuid());
-            }
+            GreewsWorldState state = GreewsWorldState.get(serverPlayer.getServer());
+            return state.getRace(player.getUuid());
         }
         return "";
     }
@@ -38,11 +32,8 @@ public class PlayerDataManager {
         }
         
         if (player instanceof ServerPlayerEntity serverPlayer) {
-            World world = serverPlayer.getEntityWorld();
-            if (world instanceof ServerWorld serverWorld) {
-                GreewsWorldState state = GreewsWorldState.get(serverWorld);
-                return state.hasRace(player.getUuid());
-            }
+            GreewsWorldState state = GreewsWorldState.get(serverPlayer.getServer());
+            return state.hasRace(player.getUuid());
         }
         return false;
     }

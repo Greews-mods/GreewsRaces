@@ -1,14 +1,21 @@
 package com.greewsraces;
 
+import java.util.Locale;
+
 public enum Language {
-    CZECH("cs", "Čeština", "CZ"),
     ENGLISH("en", "English", "EN"),
+    CZECH("cs", "Čeština", "CZ"),
+    FRENCH("fr", "Français", "FR"),
+    PORTUGUESE("pt", "Português", "PT"),
+    TURKISH("tr", "Türkçe", "TR"),
     GERMAN("de", "Deutsch", "DE"),
     SPANISH("es", "Español", "ES"),
     POLISH("pl", "Polski", "PL"),
     SLOVAK("sk", "Slovenčina", "SK"),
     UKRAINIAN("uk", "Українська", "UA"),
     RUSSIAN("ru", "Русский", "RU");
+
+    public static final Language DEFAULT = ENGLISH;
 
     private final String code;
     private final String displayName;
@@ -26,13 +33,27 @@ public enum Language {
 
     public static Language fromCode(String code) {
         if (code == null || code.isEmpty()) {
-            return CZECH;
+            return DEFAULT;
         }
         for (Language lang : values()) {
             if (lang.code.equals(code)) {
                 return lang;
             }
         }
-        return CZECH;
+        return DEFAULT;
+    }
+
+    /** Maps Minecraft locale (e.g. en_us, fr_fr) to a supported mod language, else English. */
+    public static Language fromMinecraftLocale(String locale) {
+        if (locale == null || locale.isEmpty()) {
+            return DEFAULT;
+        }
+        String base = locale.split("_", 2)[0].toLowerCase(Locale.ROOT);
+        for (Language lang : values()) {
+            if (lang.code.equals(base)) {
+                return lang;
+            }
+        }
+        return DEFAULT;
     }
 }

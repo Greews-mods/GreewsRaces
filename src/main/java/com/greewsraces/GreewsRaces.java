@@ -2,6 +2,8 @@ package com.greewsraces;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
@@ -113,6 +115,33 @@ public class GreewsRaces implements ModInitializer {
                 }
             }
         });
+
+        ServerPlayerEvents.AFTER_RESPAWN.register((oldPlayer, newPlayer, alive) -> {
+            if (!alive) {
+                return;
+            }
+            GreewsWorldState state = GreewsWorldState.get(newPlayer.getServer());
+            String raceId = state.getRace(newPlayer.getUuid());
+            String languageCode = state.getLanguage(newPlayer.getUuid());
+
+            if (raceId != null && !raceId.isEmpty()) {
+                if (!ServerConfig.isRaceEnabled(raceId)) {
+                    raceId = Race.HUMAN.getId();
+                    state.setRace(newPlayer.getUuid(), raceId);
+                }
+                RaceHandler.applyRaceAttributes(newPlayer, raceId);
+                ServerPlayNetworking.send(newPlayer, new RaceSyncPayload(raceId));
+                syncRaceToAllPlayers(newPlayer, raceId);
+                LOGGER.info("Restored race {} for {} after respawn", raceId, newPlayer.getName().getString());
+            }
+
+            ServerPlayNetworking.send(newPlayer, new PlayerLanguageSyncPayload(
+                newPlayer.getUuid(),
+                languageCode != null ? languageCode : ""
+            ));
+        });
+
+        ServerLifecycleEvents.SERVER_STOPPED.register(server -> GreewsWorldState.clearCache());
 
         // Blindness pro ne-upíry v Evernight biomu
         ServerTickEvents.END_SERVER_TICK.register(server -> {

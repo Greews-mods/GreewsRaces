@@ -6,11 +6,13 @@
   "mixins": [
     "MiningSpeedMixin",
     "PlayerEntityMixin",
-    "PlayerListEntryMixin",
     "FoodMixin",
-    "TridentDamageMixin"
+    "TridentDamageMixin",
+    "ArrowDamageMixin"
   ],
-  "client": [],
+  "client": [
+    "PlayerListEntryMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

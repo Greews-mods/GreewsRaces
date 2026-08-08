@@ -47,9 +47,12 @@ public class LanguageSelectionScreen extends Screen {
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         super.render(context, mouseX, mouseY, delta);
+        MinecraftClient client = MinecraftClient.getInstance();
         Language uiLang = ClientLanguageStorage.hasServerLanguageChoice()
             ? ClientLanguageStorage.getLanguage()
-            : Language.CZECH;
+            : Language.fromMinecraftLocale(
+                client != null && client.options != null ? client.options.language : ""
+            );
         context.drawCenteredTextWithShadow(
             this.textRenderer,
             Text.literal(Translation.get("select_language", uiLang)),
