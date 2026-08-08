@@ -166,38 +166,14 @@ public class RaceSelectionScreen extends Screen {
 
     private void drawRaceIcon(DrawContext context, int x, int y, int size, Race race) {
         RaceIcon icon = AllRaceIcons.byRace(race);
-        
-        try {
-            context.drawTexture(
-                RaceIcon.SPRITE_SHEET,
-                x, y,
-                icon.getX(), icon.getY(),
-                size, size,
-                384, 64
-            );
-        } catch (Exception e) {
-            drawFallbackIcon(context, x, y, size, race);
-        }
-    }
-    private void drawFallbackIcon(DrawContext context, int x, int y, int size, Race race) {
-        int iconColor = race.getColor() | 0xFF000000;
-        context.fill(x, y, x + size, y + size, iconColor);
-
-        for (int i = 0; i < size / 2; i++) {
-            int alpha = 80 - (i * 2);
-            if (alpha > 0) {
-                context.fill(x, y + size - i - 1, x + size, y + size - i, (alpha << 24));
-            }
-        }
-
-        String initial = Translation.get("race." + race.getId(), ClientLanguageStorage.getLanguage())
-            .substring(0, 1).toUpperCase();
-        context.drawCenteredTextWithShadow(
-            this.textRenderer,
-            Text.literal(initial),
-            x + size / 2,
-            y + size / 2 - 4,
-            0xFFFFFFFF
+        int texSize = icon.getSize();
+        context.drawTexture(
+            icon.getTexture(),
+            x, y,
+            size, size,
+            0.0F, 0.0F,
+            texSize, texSize,
+            texSize, texSize
         );
     }
 

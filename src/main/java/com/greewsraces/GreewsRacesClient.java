@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.player.PlayerEntity;
 
 public class GreewsRacesClient implements ClientModInitializer {
     private static String clientRaceId = "";
@@ -45,6 +46,7 @@ public class GreewsRacesClient implements ClientModInitializer {
                 MinecraftClient c = client;
                 if (c.player != null) {
                     ClientRaceStorage.setRace(c.player.getUuid(), clientRaceId);
+                    c.player.calculateDimensions();
                 }
 
                 GreewsRaces.LOGGER.info("Received own race sync: {}", clientRaceId);
@@ -61,6 +63,12 @@ public class GreewsRacesClient implements ClientModInitializer {
             PlayerRaceSyncPayload payload = PlayerRaceSyncPayload.read(buf);
             client.execute(() -> {
                 ClientRaceStorage.setRace(payload.playerId(), payload.raceId());
+                if (client.world != null) {
+                    PlayerEntity syncedPlayer = client.world.getPlayerByUuid(payload.playerId());
+                    if (syncedPlayer != null) {
+                        syncedPlayer.calculateDimensions();
+                    }
+                }
                 GreewsRaces.LOGGER.info("Received race sync for player {}: {}",
                     payload.playerId(), payload.raceId());
             });

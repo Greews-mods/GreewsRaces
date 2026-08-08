@@ -54,6 +54,8 @@ public class RaceHandler {
         if (player.getHealth() > player.getMaxHealth()) {
             player.setHealth(player.getMaxHealth());
         }
+
+        player.calculateDimensions();
     }
 
     public static void resetAttributes(PlayerEntity player) {
@@ -75,5 +77,7 @@ public class RaceHandler {
         if (player.getHealth() > player.getMaxHealth()) {
             player.setHealth(player.getMaxHealth());
         }
+
+        player.calculateDimensions();
     }
 }
