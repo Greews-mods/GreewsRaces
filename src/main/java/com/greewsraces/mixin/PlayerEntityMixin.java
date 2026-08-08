@@ -78,9 +78,9 @@ public abstract class PlayerEntityMixin {
         method = "attack",
         at = @At(
             value = "INVOKE",
-            target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/server/world/ServerWorld;Lnet/minecraft/entity/damage/DamageSource;F)Z"
+            target = "Lnet/minecraft/entity/Entity;sidedDamage(Lnet/minecraft/entity/damage/DamageSource;F)Z"
         ),
-        index = 2
+        index = 1
     )
     private float greewsraces$scaleMeleeDamage(float amount) {
         return RaceWeaponDamage.multiplyMelee((PlayerEntity) (Object) this, amount);
