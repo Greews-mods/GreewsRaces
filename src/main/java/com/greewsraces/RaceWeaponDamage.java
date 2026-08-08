@@ -4,12 +4,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.CrossbowItem;
-import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.PickaxeItem;
-import net.minecraft.item.SwordItem;
+import net.minecraft.item.Items;
 import net.minecraft.item.TridentItem;
+import net.minecraft.registry.tag.ItemTags;
 
 /**
  * Race-based weapon damage multipliers (melee and projectile).
@@ -31,22 +30,22 @@ public final class RaceWeaponDamage {
             return WeaponCategory.NONE;
         }
         Item item = stack.getItem();
-        if (item instanceof SwordItem) {
+        if (stack.isIn(ItemTags.SWORDS)) {
             return WeaponCategory.SWORD;
         }
-        if (item instanceof AxeItem) {
+        if (stack.isIn(ItemTags.AXES) || item instanceof AxeItem) {
             return WeaponCategory.AXE;
         }
-        if (item instanceof BowItem) {
+        if (item instanceof BowItem || item == Items.BOW) {
             return WeaponCategory.BOW;
         }
-        if (item instanceof CrossbowItem) {
+        if (item instanceof CrossbowItem || item == Items.CROSSBOW) {
             return WeaponCategory.CROSSBOW;
         }
-        if (item instanceof PickaxeItem) {
+        if (stack.isIn(ItemTags.PICKAXES)) {
             return WeaponCategory.PICKAXE;
         }
-        if (item instanceof TridentItem) {
+        if (item instanceof TridentItem || item == Items.TRIDENT) {
             return WeaponCategory.TRIDENT;
         }
         return WeaponCategory.OTHER;
@@ -67,7 +66,9 @@ public final class RaceWeaponDamage {
         Race race = Race.fromId(PlayerDataManager.getRace(player));
         WeaponCategory cat = WeaponCategory.BOW;
         if (player.getMainHandStack().getItem() instanceof CrossbowItem
-            || player.getOffHandStack().getItem() instanceof CrossbowItem) {
+            || player.getOffHandStack().getItem() instanceof CrossbowItem
+            || player.getMainHandStack().isOf(Items.CROSSBOW)
+            || player.getOffHandStack().isOf(Items.CROSSBOW)) {
             cat = WeaponCategory.CROSSBOW;
         }
         return damage * meleeMultiplier(race, cat);
