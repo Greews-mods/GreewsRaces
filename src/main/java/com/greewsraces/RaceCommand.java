@@ -22,9 +22,9 @@ public class RaceCommand {
 
         dispatcher.register(CommandManager.literal("race")
             .then(CommandManager.literal("menu")
-                .requires(RaceCommand::hasPermissionLevel2)
                 .executes(RaceCommand::openRaceMenuSelf)
                 .then(CommandManager.argument("player", EntityArgumentType.player())
+                    .requires(RaceCommand::hasPermissionLevel2)
                     .executes(RaceCommand::openRaceMenuTarget)))
             .then(CommandManager.literal("language")
                 .executes(RaceCommand::openLanguageSelf))
