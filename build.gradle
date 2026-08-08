@@ -73,3 +73,34 @@ tasks.register('copyToMcBuilds', Copy) {
 }
 
 build.finalizedBy copyToMcBuilds
+def modrinthProfileNames = [
+    '1.21.11': 'testing 1.21.11',
+    '1.21.10': 'testing',
+    '1.21.1' : 'testing 1.21.1',
+    '1.20.1' : 'testing 1.20.1',
+]
+
+tasks.register('copyToModrinthTesting') {
+    dependsOn remapJar
+    doLast {
+        def profileName = modrinthProfileNames[minecraft_version]
+        if (profileName == null) {
+            return
+        }
+        def modsDir = file("${System.getProperty('user.home')}/AppData/Roaming/ModrinthApp/profiles/${profileName}/mods")
+        modsDir.mkdirs()
+        modsDir.listFiles()?.each { candidate ->
+            if (candidate.name.startsWith('greewsraces') && candidate.name.endsWith('.jar')) {
+                candidate.delete()
+            }
+        }
+        def outJar = layout.buildDirectory.file("libs/${archives_base_name}-${version}.jar").get().asFile
+        copy {
+            from outJar
+            into modsDir
+        }
+        logger.lifecycle("Copied ${outJar.name} to ${modsDir}")
+    }
+}
+
+build.finalizedBy copyToModrinthTesting
