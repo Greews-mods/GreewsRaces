@@ -56,7 +56,7 @@ public abstract class PlayerEntityMixin {
         if (PlayerDataManager.hasRaceSelected(player)) {
             Race race = Race.fromId(PlayerDataManager.getRace(player));
 
-            // Démon – imunita vůči ohni
+            // DÃ©mon â imunita vÅ¯Äi ohni
             if (race == Race.DEMON) {
                 if (source.isIn(DamageTypeTags.IS_FIRE)) {
                     cir.setReturnValue(false);
@@ -64,7 +64,7 @@ public abstract class PlayerEntityMixin {
                 }
             }
 
-            // Ghůl – imunita vůči utopení
+            // GhÅ¯l â imunita vÅ¯Äi utopenÃ­
             if (race == Race.GHOUL) {
                 if (source.isIn(DamageTypeTags.IS_DROWNING)) {
                     cir.setReturnValue(false);
@@ -93,7 +93,7 @@ public abstract class PlayerEntityMixin {
         if (PlayerDataManager.hasRaceSelected(player)) {
             Race race = Race.fromId(PlayerDataManager.getRace(player));
 
-            // Upír – lifesteal
+            // UpÃ­r â lifesteal
             if (race == Race.VAMPIRE && target instanceof LivingEntity) {
                 if (player.getRandom().nextFloat() < 0.30f) {
                     float currentHealth = player.getHealth();
@@ -114,7 +114,7 @@ public abstract class PlayerEntityMixin {
         if (!world.isClient() && PlayerDataManager.hasRaceSelected(player)) {
             Race race = Race.fromId(PlayerDataManager.getRace(player));
 
-            // === DÉMON ===
+            // === DÃMON ===
             if (race == Race.DEMON) {
                 if (player.isOnFire()) {
                     player.extinguish();
@@ -126,9 +126,9 @@ public abstract class PlayerEntityMixin {
                 }
             }
 
-            // === UPÍR ===
+            // === UPÃR ===
             if (race == Race.VAMPIRE) {
-                // V Evernight biomu upír nehoří – je to jejich domov
+                // V Evernight biomu upÃ­r nehoÅÃ­ â je to jejich domov
                 boolean inEvernight = BiomeRegistration.isInEvernightBiome(player);
                 if (!inEvernight && world.isDay() && !player.isSubmergedInWater()) {
                     if (world.isSkyVisible(player.getBlockPos())) {
@@ -139,14 +139,14 @@ public abstract class PlayerEntityMixin {
                 }
             }
 
-            // === GHŮL – dýchání pod vodou ===
+            // === GHÅ®L â dÃ½chÃ¡nÃ­ pod vodou ===
             if (race == Race.GHOUL) {
                 if (player.isSubmergedInWater()) {
                     player.setAir(player.getMaxAir());
                 }
             }
 
-            // === NOČNÍ ELF – rychlost v noci ===
+            // === NOÄNÃ ELF â rychlost v noci ===
             if (race == Race.NIGHT_ELF) {
                 var speedAttr = player.getAttributeInstance(net.minecraft.entity.attribute.EntityAttributes.GENERIC_MOVEMENT_SPEED);
                 if (speedAttr != null) {
@@ -165,8 +165,8 @@ public abstract class PlayerEntityMixin {
                 }
             }
 
-            // === VÍLA – bonus brnění z kožené zbroje ===
-            // Přepočítáváme každých 20 ticků (1 sekunda) aby nedocházelo k problémům
+            // === VÃLA â bonus brnÄnÃ­ z koÅ¾enÃ© zbroje ===
+            // PÅepoÄÃ­tÃ¡vÃ¡me kaÅ¾dÃ½ch 20 tickÅ¯ (1 sekunda) aby nedochÃ¡zelo k problÃ©mÅ¯m
             if (race == Race.FAIRY && player.age % 20 == 0) {
                 applyFairyLeatherArmorBonus(player);
             }
@@ -174,8 +174,8 @@ public abstract class PlayerEntityMixin {
     }
 
     /**
-     * Víla: +20% brnění za každý kus kožené zbroje.
-     * MC 1.21.10: getEquippedStack(EquipmentSlot) místo getArmorItems()
+     * VÃ­la: +20% brnÄnÃ­ za kaÅ¾dÃ½ kus koÅ¾enÃ© zbroje.
+     * MC 1.21.10: getEquippedStack(EquipmentSlot) mÃ­sto getArmorItems()
      */
     private void applyFairyLeatherArmorBonus(PlayerEntity player) {
         EquipmentSlot[] armorSlots = {
@@ -200,19 +200,19 @@ public abstract class PlayerEntityMixin {
         var armorAttr = player.getAttributeInstance(
             net.minecraft.entity.attribute.EntityAttributes.GENERIC_ARMOR);
         if (armorAttr != null) {
-            net.minecraft.util.Identifier leatherId =
-                net.minecraft.util.Identifier.of("greewsraces", "fairy_leather_bonus");
-            armorAttr.removeModifier(leatherId);
+            java.util.UUID leatherUuid = java.util.UUID.fromString("7c2f5a1e-4b9d-4c3e-a1f2-9e8d7c6b5a40");
+            armorAttr.removeModifier(leatherUuid);
 
             if (leatherPieces > 0) {
                 double bonus = leatherPieces * 1.0;
                 net.minecraft.entity.attribute.EntityAttributeModifier leatherMod =
                     new net.minecraft.entity.attribute.EntityAttributeModifier(
-                        leatherId,
+                        leatherUuid,
+                        "greewsraces_fairy_leather",
                         bonus,
-                        net.minecraft.entity.attribute.EntityAttributeModifier.Operation.ADD_VALUE
+                        net.minecraft.entity.attribute.EntityAttributeModifier.Operation.ADDITION
                     );
-                armorAttr.addPersistentModifier(leatherMod);
+                armorAttr.addTemporaryModifier(leatherMod);
             }
         }
     }
