@@ -2,14 +2,13 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.greewsraces.mixin",
-  "compatibilityLevel": "JAVA_17",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
     "MiningSpeedMixin",
     "PlayerEntityMixin",
     "FoodMixin",
     "TridentDamageMixin",
-    "ArrowDamageMixin",
-    "EntityScaleMixin"
+    "ArrowDamageMixin"
   ],
   "client": [
     "PlayerListEntryMixin"

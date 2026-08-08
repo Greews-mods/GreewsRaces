@@ -8,6 +8,7 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.world.World;
@@ -112,6 +113,7 @@ public abstract class PlayerEntityMixin {
 
         if (!world.isClient() && PlayerDataManager.hasRaceSelected(player)) {
             Race race = Race.fromId(PlayerDataManager.getRace(player));
+
             // === DÉMON ===
             if (race == Race.DEMON) {
                 if (player.isOnFire()) {
@@ -198,19 +200,19 @@ public abstract class PlayerEntityMixin {
         var armorAttr = player.getAttributeInstance(
             net.minecraft.entity.attribute.EntityAttributes.GENERIC_ARMOR);
         if (armorAttr != null) {
-            java.util.UUID leatherUuid = java.util.UUID.fromString("7c2f5a1e-4b9d-4c3e-a1f2-9e8d7c6b5a40");
-            armorAttr.removeModifier(leatherUuid);
+            net.minecraft.util.Identifier leatherId =
+                net.minecraft.util.Identifier.of("greewsraces", "fairy_leather_bonus");
+            armorAttr.removeModifier(leatherId);
 
             if (leatherPieces > 0) {
                 double bonus = leatherPieces * 1.0;
                 net.minecraft.entity.attribute.EntityAttributeModifier leatherMod =
                     new net.minecraft.entity.attribute.EntityAttributeModifier(
-                        leatherUuid,
-                        "greewsraces_fairy_leather",
+                        leatherId,
                         bonus,
-                        net.minecraft.entity.attribute.EntityAttributeModifier.Operation.ADDITION
+                        net.minecraft.entity.attribute.EntityAttributeModifier.Operation.ADD_VALUE
                     );
-                armorAttr.addTemporaryModifier(leatherMod);
+                armorAttr.addPersistentModifier(leatherMod);
             }
         }
     }
