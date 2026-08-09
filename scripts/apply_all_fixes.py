@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PORT = Path(r"c:\Users\farda\Desktop\_greewsraces_icon_port")
+MOD_VERSION = "1.2.1-Beta"
 
 BRANCHES = [
     ("main", "modern", "modern_lang", None, "sided"),
@@ -237,7 +238,7 @@ def apply_branch(branch: str, icon_key: str, lang_key: str, mixin_level: str | N
 
     props = ROOT / "gradle.properties"
     props.write_text(
-        re.sub(r"^mod_version=.*$", "mod_version=1.2.0", props.read_text(encoding="utf-8"), flags=re.M),
+        re.sub(r"^mod_version=.*$", f"mod_version={MOD_VERSION}", props.read_text(encoding="utf-8"), flags=re.M),
         encoding="utf-8",
     )
 
