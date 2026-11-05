@@ -47,7 +47,7 @@ Use a **Java version equal or higher** than listed. The mod JAR declares require
 
 ### Fixes / compatibility
 
-- Build version **1.2.1-Beta**: generated and packaged the Mixin refmap required by the production weapon damage hooks; retained race-scaled bodies while restoring vanilla first-person camera height.
+- Build version **1.2.2-Beta**: generated and packaged the Mixin refmap required by the production weapon damage hooks; retained race-scaled bodies while restoring vanilla first-person camera height.
 - Fairy is half her former size, can toggle flight with a double jump, keeps leather armor and reach bonuses, and has no trident bonus or axe/pickaxe penalties.
 
 - **Evernight biome** uses the **legacy** `effects` / spawners layout suitable for 1.21.1.
