@@ -1,0 +1,16 @@
+{
+  "item.greewsraces.wood_wand": "Holz Zauberstab",
+  "item.greewsraces.copper_wand": "Kupfer Zauberstab",
+  "item.greewsraces.iron_wand": "Eisen Zauberstab",
+  "item.greewsraces.gold_wand": "Gold Zauberstab",
+  "item.greewsraces.diamond_wand": "Diamant Zauberstab",
+  "item.greewsraces.netherite_wand": "Netherit Zauberstab",
+  "item.greewsraces.orb_wood": "Holzmagiekugel",
+  "item.greewsraces.orb_copper": "Kupfermagiekugel",
+  "item.greewsraces.orb_iron": "Eisenmagiekugel",
+  "item.greewsraces.orb_gold": "Goldmagiekugel",
+  "item.greewsraces.orb_diamond": "Diamantmagiekugel",
+  "item.greewsraces.orb_netherite": "Netheritmagiekugel",
+  "message.greewsraces.wand.fairy_only": "Nur Feen können Zauberstäbe benutzen.",
+  "message.greewsraces.mana.empty": "Nicht genug Mana!"
+}

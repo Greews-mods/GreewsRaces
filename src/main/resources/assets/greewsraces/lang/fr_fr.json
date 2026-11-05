@@ -1,0 +1,16 @@
+{
+  "item.greewsraces.wood_wand": "Baguette en bois",
+  "item.greewsraces.copper_wand": "Baguette en cuivre",
+  "item.greewsraces.iron_wand": "Baguette en fer",
+  "item.greewsraces.gold_wand": "Baguette en or",
+  "item.greewsraces.diamond_wand": "Baguette en diamant",
+  "item.greewsraces.netherite_wand": "Baguette en nétherite",
+  "item.greewsraces.orb_wood": "Orbe magique en bois",
+  "item.greewsraces.orb_copper": "Orbe magique en cuivre",
+  "item.greewsraces.orb_iron": "Orbe magique en fer",
+  "item.greewsraces.orb_gold": "Orbe magique en or",
+  "item.greewsraces.orb_diamond": "Orbe magique en diamant",
+  "item.greewsraces.orb_netherite": "Orbe magique en nétherite",
+  "message.greewsraces.wand.fairy_only": "Seules les fées peuvent utiliser les baguettes.",
+  "message.greewsraces.mana.empty": "Pas assez de mana !"
+}

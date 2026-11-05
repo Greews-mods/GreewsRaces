@@ -8,11 +8,13 @@
     "MiningSpeedMixin",
     "PlayerEntityMixin",
     "FoodMixin",
-    "ArrowDamageMixin"
+    "ArrowDamageMixin",
+    "MagicOrbDamageMixin"
   ],
   "client": [
     "PlayerListEntryMixin",
-    "CameraEyeHeightMixin"
+    "CameraEyeHeightMixin",
+    "FairyFoodHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

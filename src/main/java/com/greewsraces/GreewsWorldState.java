@@ -20,17 +20,21 @@ public class GreewsWorldState {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final String RACES_FILE = "greewsraces_data.json";
     private static final String LANGUAGES_FILE = "greewsraces_languages.json";
+    private static final String MANA_FILE = "greewsraces_mana.json";
     private static final Map<MinecraftServer, GreewsWorldState> INSTANCES = new HashMap<>();
 
     private final Map<String, String> playerRaces = new HashMap<>();
     private final Map<String, String> playerLanguages = new HashMap<>();
+    private final Map<String, Integer> playerManaTenths = new HashMap<>();
     private final Path racesPath;
     private final Path languagesPath;
+    private final Path manaPath;
 
     private GreewsWorldState(MinecraftServer server) {
         Path worldFolder = server.getSavePath(WorldSavePath.ROOT);
         this.racesPath = worldFolder.resolve(RACES_FILE);
         this.languagesPath = worldFolder.resolve(LANGUAGES_FILE);
+        this.manaPath = worldFolder.resolve(MANA_FILE);
         load();
     }
 
@@ -65,9 +69,19 @@ public class GreewsWorldState {
         saveLanguages();
     }
 
+    public int getManaTenths(UUID playerUuid) {
+        return playerManaTenths.getOrDefault(playerUuid.toString(), ManaHandler.MAX_MANA_TENTHS);
+    }
+
+    public void setManaTenths(UUID playerUuid, int manaTenths) {
+        playerManaTenths.put(playerUuid.toString(), Math.max(0, Math.min(ManaHandler.MAX_MANA_TENTHS, manaTenths)));
+        saveMana();
+    }
+
     private void load() {
         loadRaces();
         loadLanguages();
+        loadMana();
     }
 
     private void loadRaces() {
@@ -100,6 +114,19 @@ public class GreewsWorldState {
         }
     }
 
+    private void loadMana() {
+        if (Files.exists(manaPath)) {
+            try (Reader reader = Files.newBufferedReader(manaPath)) {
+                Type type = new TypeToken<Map<String, Integer>>(){}.getType();
+                Map<String, Integer> data = GSON.fromJson(reader, type);
+                if (data != null) playerManaTenths.putAll(data);
+                GreewsRaces.LOGGER.info("Loaded mana for {} players from {}", playerManaTenths.size(), manaPath);
+            } catch (Exception e) {
+                GreewsRaces.LOGGER.error("Failed to load mana data", e);
+            }
+        }
+    }
+
     private void saveRaces() {
         try {
             Files.createDirectories(racesPath.getParent());
@@ -119,6 +146,17 @@ public class GreewsWorldState {
             }
         } catch (Exception e) {
             GreewsRaces.LOGGER.error("Failed to save language data", e);
+        }
+    }
+
+    private void saveMana() {
+        try {
+            Files.createDirectories(manaPath.getParent());
+            try (Writer writer = Files.newBufferedWriter(manaPath)) {
+                GSON.toJson(playerManaTenths, writer);
+            }
+        } catch (Exception e) {
+            GreewsRaces.LOGGER.error("Failed to save mana data", e);
         }
     }
 

@@ -23,6 +23,13 @@ Use a **Java version equal or higher** than listed. The mod JAR declares require
 
 ### Added / changed
 
+- **Fairy mana and wands (1.2.3-Beta):** Fairies have a persisted 10-point mana pool, regenerating 0.1 mana per second. Six tiered wands fire matching colored orb projectiles for 1 mana, with damage scaling by tier. Food HUD moves alongside armor and a blue mana bar appears below it. Netherite wand recipe uses two diagonal Netherite ingots and a Nether Star at the top-right.
+
+- **Race camera comfort:** race height still changes the visible player model, but first-person camera eye height is restored to the normal vanilla player height.
+- **Weapon damage injection fix:** configure Loom to generate and package the Mixin refmap so the race melee and projectile damage hooks can resolve Minecraft targets in production JARs.
+- **Fairy rework:** she is 50% of her previous size, can double-jump to toggle flight, keeps her leather armor and reach bonuses, and no longer gets a trident bonus or axe/pickaxe damage penalties. All translated descriptions were updated.
+- Build version is **1.2.2-Beta**.
+
 - **Client config** (`config/greewsraces-client.json`): `version` field for future migrations; **`showRaceTabPrefix`** (default `true`) — toggles the `[Race]` prefix before player names in the **tab list** (client-side).
 - **Evernight biome** datapack uses the **current (1.21.11+) biome JSON** format (including updated effects / attributes where applicable).
 - Server-side race/language flows, networking sync, optional TerraBlender Evernight biome (gated by server config), commands, and related UI continue to evolve on this branch.
