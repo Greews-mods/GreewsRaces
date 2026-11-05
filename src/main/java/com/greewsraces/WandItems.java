@@ -5,6 +5,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
 import java.util.List;
@@ -27,11 +29,15 @@ public final class WandItems {
     private WandItems() {}
 
     private static WandOrbItem orb(String id, float damage) {
-        return Registry.register(Registries.ITEM, Identifier.of(GreewsRaces.MOD_ID, id), new WandOrbItem(damage));
+        Identifier itemId = Identifier.of(GreewsRaces.MOD_ID, id);
+        Item.Settings settings = new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM, itemId));
+        return Registry.register(Registries.ITEM, itemId, new WandOrbItem(damage, settings));
     }
 
     private static WandItem wand(String id, WandOrbItem orb) {
-        return Registry.register(Registries.ITEM, Identifier.of(GreewsRaces.MOD_ID, id), new WandItem(orb));
+        Identifier itemId = Identifier.of(GreewsRaces.MOD_ID, id);
+        Item.Settings settings = new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM, itemId));
+        return Registry.register(Registries.ITEM, itemId, new WandItem(orb, settings));
     }
 
     public static void register() {
