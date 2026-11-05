@@ -12,5 +12,10 @@
   "item.greewsraces.orb_diamond": "Diamantová magická guľa",
   "item.greewsraces.orb_netherite": "Netheritová magická guľa",
   "message.greewsraces.wand.fairy_only": "Paličky môžu používať iba víly.",
-  "message.greewsraces.mana.empty": "Nemáš dosť many!"
+  "message.greewsraces.mana.empty": "Nemáš dosť many!",
+  "tooltip.greewsraces.category": "Nástroje a pomôcky",
+  "tooltip.greewsraces.brand": "Greews Races",
+  "tooltip.greewsraces.mana": "Spotreba many: %s",
+  "tooltip.greewsraces.damage": "Poškodenie projektilu: %s",
+  "tooltip.greewsraces.fairy_only": "Použiteľné iba vílami"
 }

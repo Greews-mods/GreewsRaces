@@ -12,5 +12,10 @@
   "item.greewsraces.orb_diamond": "Orbe mágico de diamante",
   "item.greewsraces.orb_netherite": "Orbe mágico de netherita",
   "message.greewsraces.wand.fairy_only": "Solo las hadas pueden usar varitas.",
-  "message.greewsraces.mana.empty": "¡No tienes suficiente maná!"
+  "message.greewsraces.mana.empty": "¡No tienes suficiente maná!",
+  "tooltip.greewsraces.category": "Herramientas y utilidades",
+  "tooltip.greewsraces.brand": "Greews Races",
+  "tooltip.greewsraces.mana": "Maná utilizado: %s",
+  "tooltip.greewsraces.damage": "Daño por proyectil: %s",
+  "tooltip.greewsraces.fairy_only": "Solo las hadas pueden usarlo"
 }

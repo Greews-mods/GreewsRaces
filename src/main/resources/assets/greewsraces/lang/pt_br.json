@@ -12,5 +12,10 @@
   "item.greewsraces.orb_diamond": "Orbe mágico de diamante",
   "item.greewsraces.orb_netherite": "Orbe mágico de netherita",
   "message.greewsraces.wand.fairy_only": "Somente fadas podem usar varinhas.",
-  "message.greewsraces.mana.empty": "Mana insuficiente!"
+  "message.greewsraces.mana.empty": "Mana insuficiente!",
+  "tooltip.greewsraces.category": "Ferramentas e utilidades",
+  "tooltip.greewsraces.brand": "Greews Races",
+  "tooltip.greewsraces.mana": "Mana usada: %s",
+  "tooltip.greewsraces.damage": "Dano por projétil: %s",
+  "tooltip.greewsraces.fairy_only": "Usável apenas por fadas"
 }

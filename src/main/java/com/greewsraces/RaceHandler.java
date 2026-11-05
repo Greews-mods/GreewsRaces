@@ -62,7 +62,7 @@ public class RaceHandler {
         }
 
         // === DOSAH – Trpaslík a Víla dostávají +20% dosah jako kompenzaci ===
-        if (race == Race.DWARF || race == Race.FAIRY) {
+        if (race == Race.DWARF) {
             applyReachBonus(player, 0.20);
         }
 
@@ -122,6 +122,7 @@ public class RaceHandler {
         var abilities = player.getAbilities();
         if (fairy) {
             abilities.allowFlying = true;
+            abilities.flying = false;
         } else if (!player.isCreative() && !player.isSpectator()) {
             abilities.allowFlying = false;
             abilities.flying = false;
