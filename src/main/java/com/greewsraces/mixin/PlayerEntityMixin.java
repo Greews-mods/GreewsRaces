@@ -2,11 +2,9 @@ package com.greewsraces.mixin;
 
 import com.greewsraces.*;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
@@ -168,53 +166,8 @@ public abstract class PlayerEntityMixin {
 
             // === VÃLA â bonus brnÄnÃ­ z koÅ¾enÃ© zbroje ===
             // PÅepoÄÃ­tÃ¡vÃ¡me kaÅ¾dÃ½ch 20 tickÅ¯ (1 sekunda) aby nedochÃ¡zelo k problÃ©mÅ¯m
-            if (race == Race.FAIRY && player.age % 20 == 0) {
-                applyFairyLeatherArmorBonus(player);
-            }
+
         }
     }
 
-    /**
-     * VÃ­la: +20% brnÄnÃ­ za kaÅ¾dÃ½ kus koÅ¾enÃ© zbroje.
-     * MC 1.21.10: getEquippedStack(EquipmentSlot) mÃ­sto getArmorItems()
-     */
-    private void applyFairyLeatherArmorBonus(PlayerEntity player) {
-        EquipmentSlot[] armorSlots = {
-            EquipmentSlot.HEAD,
-            EquipmentSlot.CHEST,
-            EquipmentSlot.LEGS,
-            EquipmentSlot.FEET
-        };
-
-        int leatherPieces = 0;
-        for (EquipmentSlot slot : armorSlots) {
-            ItemStack piece = player.getEquippedStack(slot);
-            if (!piece.isEmpty()) {
-                String itemId = net.minecraft.registry.Registries.ITEM
-                    .getId(piece.getItem()).toString();
-                if (itemId.contains("leather")) {
-                    leatherPieces++;
-                }
-            }
-        }
-
-        var armorAttr = player.getAttributeInstance(
-            net.minecraft.entity.attribute.EntityAttributes.ARMOR);
-        if (armorAttr != null) {
-            net.minecraft.util.Identifier leatherId =
-                net.minecraft.util.Identifier.of("greewsraces", "fairy_leather_bonus");
-            armorAttr.removeModifier(leatherId);
-
-            if (leatherPieces > 0) {
-                double bonus = leatherPieces * 1.0;
-                net.minecraft.entity.attribute.EntityAttributeModifier leatherMod =
-                    new net.minecraft.entity.attribute.EntityAttributeModifier(
-                        leatherId,
-                        bonus,
-                        net.minecraft.entity.attribute.EntityAttributeModifier.Operation.ADD_VALUE
-                    );
-                armorAttr.addPersistentModifier(leatherMod);
-            }
-        }
-    }
 }

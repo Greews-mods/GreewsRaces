@@ -12,5 +12,10 @@
   "item.greewsraces.orb_diamond": "Diamentowa kula magii",
   "item.greewsraces.orb_netherite": "Netherytowa kula magii",
   "message.greewsraces.wand.fairy_only": "Różdżek mogą używać tylko wróżki.",
-  "message.greewsraces.mana.empty": "Za mało many!"
+  "message.greewsraces.mana.empty": "Za mało many!",
+  "tooltip.greewsraces.category": "Narzędzia i przedmioty użytkowe",
+  "tooltip.greewsraces.brand": "Greews Races",
+  "tooltip.greewsraces.mana": "Zużycie many: %s",
+  "tooltip.greewsraces.damage": "Obrażenia pocisku: %s",
+  "tooltip.greewsraces.fairy_only": "Tylko dla wróżek"
 }

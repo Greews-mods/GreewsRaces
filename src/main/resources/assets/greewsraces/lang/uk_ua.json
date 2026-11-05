@@ -12,5 +12,10 @@
   "item.greewsraces.orb_diamond": "Діамантова магічна сфера",
   "item.greewsraces.orb_netherite": "Незеритова магічна сфера",
   "message.greewsraces.wand.fairy_only": "Чарівними паличками можуть користуватися лише феї.",
-  "message.greewsraces.mana.empty": "Недостатньо мани!"
+  "message.greewsraces.mana.empty": "Недостатньо мани!",
+  "tooltip.greewsraces.category": "Інструменти та корисні предмети",
+  "tooltip.greewsraces.brand": "Greews Races",
+  "tooltip.greewsraces.mana": "Витрата мани: %s",
+  "tooltip.greewsraces.damage": "Шкода за снаряд: %s",
+  "tooltip.greewsraces.fairy_only": "Лише для фей"
 }

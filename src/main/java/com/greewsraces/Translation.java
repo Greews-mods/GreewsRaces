@@ -53,8 +53,8 @@ public class Translation {
 
         cs.put("race.fairy", "Víla");
         cs.put("race.fairy.desc", "Lehká bytost přírody");
-        cs.put("race.fairy.bonus", "+10% rychlost pohybu\n+50% brnění z kožené zbroje\n+20% dosah\nTrvalé létání (dvojitým skokem zapnout/vypnout)");
-        cs.put("race.fairy.malus", "-65% výška");
+        cs.put("race.fairy.bonus", "Trvalé létání (dvojskokem zapnout/vypnout)\nPoužívání hůlek a systém many");
+        cs.put("race.fairy.malus", "-65% výška\n-10% max. zdraví");
 
         translations.put("cs", cs);
 
@@ -104,8 +104,8 @@ public class Translation {
 
         en.put("race.fairy", "Fairy");
         en.put("race.fairy.desc", "Light creature of nature");
-        en.put("race.fairy.bonus", "+10% movement speed\n+50% armor from leather armor\n+20% reach\nPermanent flight (double-jump to toggle)");
-        en.put("race.fairy.malus", "-65% height");
+        en.put("race.fairy.bonus", "Permanent flight (double-jump to toggle)\nWand use and mana system");
+        en.put("race.fairy.malus", "-65% size\n-10% max health");
 
         translations.put("en", en);
 
@@ -146,8 +146,8 @@ public class Translation {
         fr.put("race.ghoul.malus", "Ne mange que la viande crue");
         fr.put("race.fairy", "Fée");
         fr.put("race.fairy.desc", "Créature légère de la nature");
-        fr.put("race.fairy.bonus", "+10 % vitesse de déplacement\n+50 % d’armure avec une armure en cuir\n+20 % de portée\nVol permanent (double saut pour activer/désactiver)");
-        fr.put("race.fairy.malus", "-65 % de taille");
+        fr.put("race.fairy.bonus", "Vol permanent (double saut pour activer/désactiver)\nUtilisation des baguettes et système de mana");
+        fr.put("race.fairy.malus", "-65 % taille\n-10 % santé max");
         translations.put("fr", fr);
 
         // ==================== PORTUGUÊS ====================
@@ -187,8 +187,8 @@ public class Translation {
         pt.put("race.ghoul.malus", "Só come carne crua");
         pt.put("race.fairy", "Fada");
         pt.put("race.fairy.desc", "Criatura leve da natureza");
-        pt.put("race.fairy.bonus", "+10% de velocidade de movimento\n+50% de armadura com armadura de couro\n+20% de alcance\nVoo permanente (salto duplo para ativar/desativar)");
-        pt.put("race.fairy.malus", "-65% de altura");
+        pt.put("race.fairy.bonus", "Voo permanente (salto duplo para ativar/desativar)\nUso de varinhas e sistema de mana");
+        pt.put("race.fairy.malus", "-65% tamanho\n-10% vida máxima");
         translations.put("pt", pt);
 
         // ==================== TÜRKÇE ====================
@@ -228,8 +228,8 @@ public class Translation {
         tr.put("race.ghoul.malus", "Sadece çiğ et yer");
         tr.put("race.fairy", "Peri");
         tr.put("race.fairy.desc", "Doğanın hafif yaratığı");
-        tr.put("race.fairy.bonus", "Hareket hızı +%10\nDeri zırhtan zırh +%50\nMenzil +%20\nSürekli uçuş (açıp kapatmak için çift zıpla)");
-        tr.put("race.fairy.malus", "Boy -%65");
+        tr.put("race.fairy.bonus", "Sürekli uçuş (açıp kapatmak için çift zıpla)\nAsa kullanımı ve mana sistemi");
+        tr.put("race.fairy.malus", "Boyut -%65\nMaksimum can -%10");
         translations.put("tr", tr);
 
 
@@ -278,8 +278,8 @@ public class Translation {
 
         es.put("race.fairy", "Hada");
         es.put("race.fairy.desc", "Criatura ligera de la naturaleza");
-        es.put("race.fairy.bonus", "+10% de velocidad de movimiento\n+50% de armadura con armadura de cuero\n+20% de alcance\nVuelo permanente (doble salto para activar/desactivar)");
-        es.put("race.fairy.malus", "-65% de altura");
+        es.put("race.fairy.bonus", "Vuelo permanente (doble salto para activar/desactivar)\nUso de varitas y sistema de maná");
+        es.put("race.fairy.malus", "-65% tamaño\n-10% salud máxima");
 
         translations.put("es", es);
 
@@ -329,8 +329,8 @@ public class Translation {
 
         de.put("race.fairy", "Fee");
         de.put("race.fairy.desc", "Leichtes Wesen der Natur");
-        de.put("race.fairy.bonus", "+10% Bewegungsgeschwindigkeit\n+50% Rüstung durch Lederrüstung\n+20% Reichweite\nDauerhaftes Fliegen (Doppelsprung zum Ein-/Ausschalten)");
-        de.put("race.fairy.malus", "-65% Größe");
+        de.put("race.fairy.bonus", "Dauerhaftes Fliegen (Doppelsprung zum Ein-/Ausschalten)\nZauberstabnutzung und Manasystem");
+        de.put("race.fairy.malus", "-65% Größe\n-10% max. Gesundheit");
 
         translations.put("de", de);
 
@@ -380,8 +380,8 @@ public class Translation {
 
         pl.put("race.fairy", "Wróżka");
         pl.put("race.fairy.desc", "Lekka istota natury");
-        pl.put("race.fairy.bonus", "+10% szybkości ruchu\n+50% pancerza ze skórzanej zbroi\n+20% zasięgu\nStałe latanie (podwójny skok włącza/wyłącza)");
-        pl.put("race.fairy.malus", "-65% wzrostu");
+        pl.put("race.fairy.bonus", "Stałe latanie (podwójny skok włącza/wyłącza)\nUżywanie różdżek i system many");
+        pl.put("race.fairy.malus", "-65% rozmiaru\n-10% maks. zdrowia");
 
         translations.put("pl", pl);
 
@@ -431,8 +431,8 @@ public class Translation {
 
         sk.put("race.fairy", "Víla");
         sk.put("race.fairy.desc", "Ľahká bytosť prírody");
-        sk.put("race.fairy.bonus", "+10% rýchlosť pohybu\n+50% brnenie z koženej zbroje\n+20% dosah\nTrvalé lietanie (dvojitým skokom zapnúť/vypnúť)");
-        sk.put("race.fairy.malus", "-65% výška");
+        sk.put("race.fairy.bonus", "Trvalé lietanie (dvojskokom zapnúť/vypnúť)\nPoužívanie paličiek a systém many");
+        sk.put("race.fairy.malus", "-65% veľkosti\n-10% max. zdravia");
 
         translations.put("sk", sk);
 
@@ -482,8 +482,8 @@ public class Translation {
 
         uk.put("race.fairy", "Фея");
         uk.put("race.fairy.desc", "Легка істота природи");
-        uk.put("race.fairy.bonus", "+10% швидкості руху\n+50% броні зі шкіряної броні\n+20% досяжності\nПостійний політ (подвійний стрибок, щоб увімкнути/вимкнути)");
-        uk.put("race.fairy.malus", "-65% зросту");
+        uk.put("race.fairy.bonus", "Постійний політ (подвійний стрибок для перемикання)\nВикористання паличок і система мани");
+        uk.put("race.fairy.malus", "-65% розміру\n-10% max HP");
 
         translations.put("uk", uk);
 
@@ -533,8 +533,8 @@ public class Translation {
 
         ru.put("race.fairy", "Фея");
         ru.put("race.fairy.desc", "Лёгкое существо природы");
-        ru.put("race.fairy.bonus", "+10% скорости передвижения\n+50% брони от кожаной брони\n+20% дальности\nПостоянный полёт (двойной прыжок для включения/выключения)");
-        ru.put("race.fairy.malus", "-65% роста");
+        ru.put("race.fairy.bonus", "Постоянный полёт (двойной прыжок для переключения)\nИспользование палочек и система маны");
+        ru.put("race.fairy.malus", "-65% размера\n-10% максимального здоровья");
 
         translations.put("ru", ru);
     }

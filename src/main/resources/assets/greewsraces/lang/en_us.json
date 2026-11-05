@@ -12,5 +12,10 @@
   "item.greewsraces.orb_diamond": "Diamond Magic Orb",
   "item.greewsraces.orb_netherite": "Netherite Magic Orb",
   "message.greewsraces.wand.fairy_only": "Only fairies can use wands.",
-  "message.greewsraces.mana.empty": "Not enough mana!"
+  "message.greewsraces.mana.empty": "Not enough mana!",
+  "tooltip.greewsraces.category": "Tools & Utilities",
+  "tooltip.greewsraces.brand": "Greews Races",
+  "tooltip.greewsraces.mana": "Mana usage: %s",
+  "tooltip.greewsraces.damage": "Damage per projectile: %s",
+  "tooltip.greewsraces.fairy_only": "Only usable by Fairies"
 }

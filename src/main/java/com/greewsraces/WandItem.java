@@ -3,9 +3,14 @@ package com.greewsraces;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.component.type.TooltipDisplayComponent;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.text.Text;
 import net.minecraft.world.World;
+
+import java.util.function.Consumer;
 
 public class WandItem extends Item {
     private final WandOrbItem orb;
@@ -17,6 +22,12 @@ public class WandItem extends Item {
 
     public WandOrbItem getOrb() {
         return orb;
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, TooltipDisplayComponent display,
+                              Consumer<Text> textConsumer, TooltipType type) {
+        WandTooltip.lines(orb).forEach(textConsumer);
     }
 
     @Override
