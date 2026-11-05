@@ -1,0 +1,16 @@
+{
+  "item.greewsraces.wood_wand": "Varinha de madeira",
+  "item.greewsraces.copper_wand": "Varinha de cobre",
+  "item.greewsraces.iron_wand": "Varinha de ferro",
+  "item.greewsraces.gold_wand": "Varinha de ouro",
+  "item.greewsraces.diamond_wand": "Varinha de diamante",
+  "item.greewsraces.netherite_wand": "Varinha de netherita",
+  "item.greewsraces.orb_wood": "Orbe mágico de madeira",
+  "item.greewsraces.orb_copper": "Orbe mágico de cobre",
+  "item.greewsraces.orb_iron": "Orbe mágico de ferro",
+  "item.greewsraces.orb_gold": "Orbe mágico de ouro",
+  "item.greewsraces.orb_diamond": "Orbe mágico de diamante",
+  "item.greewsraces.orb_netherite": "Orbe mágico de netherita",
+  "message.greewsraces.wand.fairy_only": "Somente fadas podem usar varinhas.",
+  "message.greewsraces.mana.empty": "Mana insuficiente!"
+}

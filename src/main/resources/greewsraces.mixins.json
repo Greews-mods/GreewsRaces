@@ -9,12 +9,14 @@
     "PlayerEntityMixin",
     "EntityScaleMixin",
     "FoodMixin",
-    "ArrowDamageMixin"
+    "ArrowDamageMixin",
+    "MagicOrbDamageMixin"
   ],
   "client": [
     "PlayerListEntryMixin",
     "PlayerRendererScaleMixin",
-    "CameraEyeHeightMixin"
+    "CameraEyeHeightMixin",
+    "FairyFoodHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1

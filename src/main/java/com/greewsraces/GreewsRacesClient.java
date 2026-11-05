@@ -6,6 +6,9 @@ import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
+import net.minecraft.text.Text;
+import net.minecraft.client.gui.DrawContext;
 
 public class GreewsRacesClient implements ClientModInitializer {
     private static String clientRaceId = "";
@@ -16,6 +19,12 @@ public class GreewsRacesClient implements ClientModInitializer {
     public void onInitializeClient() {
         ClientConfig.load();
         GreewsRaces.LOGGER.info("GreewsRaces client initialized!");
+
+        ClientPlayNetworking.registerGlobalReceiver(ManaSyncPayload.ID, (client, handler, buf, responseSender) -> {
+            ManaSyncPayload payload = ManaSyncPayload.read(buf);
+            client.execute(() -> ClientManaStorage.setManaTenths(payload.manaTenths()));
+        });
+        HudRenderCallback.EVENT.register((context, tickDelta) -> renderManaBar(context));
 
         ClientPlayNetworking.registerGlobalReceiver(RacesConfigSyncPayload.ID, (client, handler, buf, responseSender) -> {
             RacesConfigSyncPayload payload = RacesConfigSyncPayload.read(buf);
@@ -91,6 +100,7 @@ public class GreewsRacesClient implements ClientModInitializer {
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
             ClientRaceStorage.clear();
             ClientLanguageStorage.clear();
+            ClientManaStorage.reset();
             resetSync();
             GreewsRaces.LOGGER.info("Cleared client storage on disconnect");
         });
@@ -115,6 +125,22 @@ public class GreewsRacesClient implements ClientModInitializer {
                 }
             }
         });
+    }
+
+    private static void renderManaBar(DrawContext context) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null || client.options.hudHidden
+            || !"fairy".equals(ClientRaceStorage.getRace(client.player.getUuid()))) return;
+        int width = 81, height = 7;
+        int x = context.getScaledWindowWidth() / 2 + 10;
+        int y = context.getScaledWindowHeight() - 39;
+        int mana = ClientManaStorage.getManaTenths();
+        int fill = width * mana / ManaHandler.MAX_MANA_TENTHS;
+        context.fill(x - 1, y - 1, x + width + 1, y + height + 1, 0xFF101820);
+        context.fill(x, y, x + width, y + height, 0xFF172C45);
+        if (fill > 0) context.fill(x, y, x + fill, y + height, 0xFF268CFF);
+        String amount = (mana % 10 == 0 ? mana / 10 : (mana / 10) + "." + (mana % 10)) + "/10";
+        context.drawText(client.textRenderer, Text.literal(amount), x + (width - client.textRenderer.getWidth(amount)) / 2, y - 1, 0xFFFFFFFF, true);
     }
 
     private static void schedulePostLoginFlow() {

@@ -1,0 +1,16 @@
+{
+  "item.greewsraces.wood_wand": "Tahta Asa",
+  "item.greewsraces.copper_wand": "Bakır Asa",
+  "item.greewsraces.iron_wand": "Demir Asa",
+  "item.greewsraces.gold_wand": "Altın Asa",
+  "item.greewsraces.diamond_wand": "Elmas Asa",
+  "item.greewsraces.netherite_wand": "Netherit Asa",
+  "item.greewsraces.orb_wood": "Tahta Büyü Küresi",
+  "item.greewsraces.orb_copper": "Bakır Büyü Küresi",
+  "item.greewsraces.orb_iron": "Demir Büyü Küresi",
+  "item.greewsraces.orb_gold": "Altın Büyü Küresi",
+  "item.greewsraces.orb_diamond": "Elmas Büyü Küresi",
+  "item.greewsraces.orb_netherite": "Netherit Büyü Küresi",
+  "message.greewsraces.wand.fairy_only": "Asaları yalnızca periler kullanabilir.",
+  "message.greewsraces.mana.empty": "Yeterli mana yok!"
+}

@@ -59,6 +59,8 @@ Use a **Java version equal or higher** than listed. The mod JAR declares require
 
 ### Fixes / compatibility
 
+- **Fairy mana and wands (1.2.3-Beta):** Persisted 10-point Fairy mana regenerates 0.1 per second. Six tiered wands fire matching colored orbs for 1 mana, with damage scaling by tier. Food HUD moves beside armor and a blue mana bar appears below it. Netherite wand recipe uses two diagonal ingots and a Nether Star at top-right.
+
 - Build version **1.2.2-Beta**: packaged the Mixin refmap for weapon damage hooks, restored vanilla first-person camera height while keeping race body scale, and reworked Fairy size/flight/weapon effects. Fairy is 50% of her previous size, can double-jump to toggle flight, retains her leather armor and reach bonuses, and has no trident bonus or axe/pickaxe penalties.
 - **Mixin compatibility** set to **`JAVA_17`** in `greewsraces.mixins.json` so the mod loads on a **Java 17** runtime (Java 21–only mixin level caused startup failure on Java 17).
 - **Evernight biome** uses the same **`carvers`: `{ "air": [] }`** object shape as vanilla 1.20.1 (not a bare empty array).

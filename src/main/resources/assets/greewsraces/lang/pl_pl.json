@@ -1,0 +1,16 @@
+{
+  "item.greewsraces.wood_wand": "Drewniana różdżka",
+  "item.greewsraces.copper_wand": "Miedziana różdżka",
+  "item.greewsraces.iron_wand": "Żelazna różdżka",
+  "item.greewsraces.gold_wand": "Złota różdżka",
+  "item.greewsraces.diamond_wand": "Diamentowa różdżka",
+  "item.greewsraces.netherite_wand": "Netherytowa różdżka",
+  "item.greewsraces.orb_wood": "Drewnista kula magii",
+  "item.greewsraces.orb_copper": "Miedziana kula magii",
+  "item.greewsraces.orb_iron": "Żelazna kula magii",
+  "item.greewsraces.orb_gold": "Złota kula magii",
+  "item.greewsraces.orb_diamond": "Diamentowa kula magii",
+  "item.greewsraces.orb_netherite": "Netherytowa kula magii",
+  "message.greewsraces.wand.fairy_only": "Różdżek mogą używać tylko wróżki.",
+  "message.greewsraces.mana.empty": "Za mało many!"
+}
