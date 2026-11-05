@@ -10,8 +10,8 @@ import net.minecraft.world.World;
 public class WandItem extends Item {
     private final WandOrbItem orb;
 
-    public WandItem(WandOrbItem orb) {
-        super(new Item.Settings().maxCount(1));
+    public WandItem(WandOrbItem orb, Item.Settings settings) {
+        super(settings.maxCount(1));
         this.orb = orb;
     }
 
