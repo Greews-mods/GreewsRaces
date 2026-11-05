@@ -35,6 +35,9 @@ Use a **Java version equal or higher** than listed. The mod JAR declares require
 
 ### Fixes / compatibility
 
+- Build version **1.2.1-Beta**: generated and packaged the Mixin refmap required by the production damage hooks; kept race-scaled bodies while restoring vanilla first-person camera height.
+- Fairy is half her former size, can toggle flight with a double jump, keeps leather armor and reach bonuses, and has no trident bonus or axe/pickaxe penalties.
+
 - **Evernight biome** (`data/greewsraces/worldgen/biome/evernight.json`) uses a **legacy-compatible** structure (integer colors under `effects`, etc.) so the game does not fail registry load on this version. **Carvers** use the **1.21.10** style: top-level **array** (e.g. empty `[]`), not the pre–1.21.10 object form.
 - **Client config** aligned with main: **`showRaceTabPrefix`** in `greewsraces-client.json`; tab list mixin respects it.
 - Tab list mixin updated to respect **`showRaceTabPrefix`**.
