@@ -35,7 +35,8 @@ public final class WandService {
         }
 
         LAST_CAST_TICK.put(player.getUuid(), now);
-        SnowballEntity projectile = new SnowballEntity(world, player, new ItemStack(orb));
+        SnowballEntity projectile = new SnowballEntity(world, player);
+        projectile.setItem(new ItemStack(orb));
         projectile.setVelocity(player, player.getPitch(), player.getYaw(), 0.0f, 1.6f, 0.0f);
         world.spawnEntity(projectile);
 
@@ -56,6 +57,6 @@ public final class WandService {
         }
 
         ServerWorld world = (ServerWorld) player.getEntityWorld();
-        target.damage(world, world.getDamageSources().playerAttack(player), orb.getMagicDamage());
+        target.damage(world.getDamageSources().playerAttack(player), orb.getMagicDamage());
     }
 }
