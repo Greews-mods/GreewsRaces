@@ -17,11 +17,16 @@ Use a **Java version equal or higher** than listed. The mod JAR declares require
 
 ---
 
-## 1.21.11 (`main`)
+## 1.21.11 (`mc-1.21.11-BETA`)
 
 **Java:** 21 or newer.
 
 ### Added / changed
+
+- **Race camera comfort:** race height still changes the visible player model, but first-person camera eye height is restored to the normal vanilla player height.
+- **Weapon damage injection fix:** configure Loom to generate and package the Mixin refmap so the race melee and projectile damage hooks can resolve Minecraft targets in production JARs.
+- **Fairy rework:** she is 50% of her previous size, can double-jump to toggle flight, keeps her leather armor and reach bonuses, and no longer gets a trident bonus or axe/pickaxe damage penalties. All translated descriptions were updated.
+- Build version is **1.2.2-Beta**.
 
 - **Client config** (`config/greewsraces-client.json`): `version` field for future migrations; **`showRaceTabPrefix`** (default `true`) — toggles the `[Race]` prefix before player names in the **tab list** (client-side).
 - **Evernight biome** datapack uses the **current (1.21.11+) biome JSON** format (including updated effects / attributes where applicable).

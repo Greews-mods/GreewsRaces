@@ -3,6 +3,13 @@ plugins {
     id 'maven-publish'
 }
 
+loom {
+    mixin {
+        useLegacyMixinAp = true
+        defaultRefmapName = "greewsraces-refmap.json"
+    }
+}
+
 group = project.maven_group
 
 // === VERZOVÁNÍ ===
