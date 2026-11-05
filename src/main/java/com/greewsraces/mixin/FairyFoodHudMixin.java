@@ -9,7 +9,11 @@ import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 @Mixin(InGameHud.class)
 public abstract class FairyFoodHudMixin {
-    @ModifyVariable(method = "renderFood", at = @At("HEAD"), argsOnly = true, index = 2)
+    @ModifyVariable(
+        method = "renderStatusBars(Lnet/minecraft/client/gui/DrawContext;)V",
+        at = @At(value = "STORE", ordinal = 6),
+        index = 12
+    )
     private int greewsraces$moveFoodBarToArmorRow(int top) {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player != null && "fairy".equals(ClientRaceStorage.getRace(client.player.getUuid()))) {
