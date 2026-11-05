@@ -12,5 +12,10 @@
   "item.greewsraces.orb_diamond": "Orbe magique en diamant",
   "item.greewsraces.orb_netherite": "Orbe magique en nétherite",
   "message.greewsraces.wand.fairy_only": "Seules les fées peuvent utiliser les baguettes.",
-  "message.greewsraces.mana.empty": "Pas assez de mana !"
+  "message.greewsraces.mana.empty": "Pas assez de mana !",
+  "tooltip.greewsraces.category": "Outils et utilitaires",
+  "tooltip.greewsraces.brand": "Greews Races",
+  "tooltip.greewsraces.mana": "Mana utilisée : %s",
+  "tooltip.greewsraces.damage": "Dégâts par projectile : %s",
+  "tooltip.greewsraces.fairy_only": "Utilisable uniquement par les fées"
 }

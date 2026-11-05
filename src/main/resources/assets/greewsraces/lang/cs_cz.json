@@ -12,5 +12,10 @@
   "item.greewsraces.orb_diamond": "Diamantová magická koule",
   "item.greewsraces.orb_netherite": "Netheritová magická koule",
   "message.greewsraces.wand.fairy_only": "Hůlky mohou používat pouze víly.",
-  "message.greewsraces.mana.empty": "Nemáš dostatek many!"
+  "message.greewsraces.mana.empty": "Nemáš dostatek many!",
+  "tooltip.greewsraces.category": "Nástroje a pomůcky",
+  "tooltip.greewsraces.brand": "Greews Races",
+  "tooltip.greewsraces.mana": "Spotřeba many: %s",
+  "tooltip.greewsraces.damage": "Poškození projektilu: %s",
+  "tooltip.greewsraces.fairy_only": "Použitelné pouze vílami"
 }

@@ -12,5 +12,10 @@
   "item.greewsraces.orb_diamond": "Elmas Büyü Küresi",
   "item.greewsraces.orb_netherite": "Netherit Büyü Küresi",
   "message.greewsraces.wand.fairy_only": "Asaları yalnızca periler kullanabilir.",
-  "message.greewsraces.mana.empty": "Yeterli mana yok!"
+  "message.greewsraces.mana.empty": "Yeterli mana yok!",
+  "tooltip.greewsraces.category": "Araçlar ve yardımcılar",
+  "tooltip.greewsraces.brand": "Greews Races",
+  "tooltip.greewsraces.mana": "Mana kullanımı: %s",
+  "tooltip.greewsraces.damage": "Mermi başına hasar: %s",
+  "tooltip.greewsraces.fairy_only": "Yalnızca periler kullanabilir"
 }
