@@ -131,7 +131,7 @@ public class GreewsRacesClient implements ClientModInitializer {
         int width = 81;
         int height = 7;
         int x = context.getScaledWindowWidth() / 2 + 10;
-        int y = context.getScaledWindowHeight() - 39;
+        int y = context.getScaledWindowHeight() - (client.player.isSubmergedInWater() ? 29 : 39);
         int mana = ClientManaStorage.getManaTenths();
         int filledWidth = width * mana / ManaHandler.MAX_MANA_TENTHS;
 
