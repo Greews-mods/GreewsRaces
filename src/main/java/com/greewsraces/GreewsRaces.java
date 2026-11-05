@@ -26,7 +26,6 @@ public class GreewsRaces implements ModInitializer {
 
         SpawnGroupHandler.register();
         WandItems.register();
-        WandItems.register();
 
         ServerPlayNetworking.registerGlobalReceiver(RaceSelectionPayload.ID, (server, player, handler, buf, responseSender) -> {
             RaceSelectionPayload payload = RaceSelectionPayload.read(buf);
@@ -46,7 +45,6 @@ public class GreewsRaces implements ModInitializer {
                     LOGGER.info("Player {} selected race: {}", player.getName().getString(), payload.raceId());
 
                     RaceSyncPayload.sendTo(player, payload.raceId());
-                    ManaHandler.sync(player);
                     ManaHandler.sync(player);
 
                     syncRaceToNearbyPlayers(player, payload.raceId());
@@ -97,7 +95,6 @@ public class GreewsRaces implements ModInitializer {
                 ));
                 RaceSyncPayload.sendTo(player, raceId != null ? raceId : "");
                 ManaHandler.sync(player);
-                ManaHandler.sync(player);
                 PlayerLanguageSyncPayload.sendTo(player, new PlayerLanguageSyncPayload(
                     player.getUuid(), languageCode != null ? languageCode : ""));
 
@@ -132,7 +129,6 @@ public class GreewsRaces implements ModInitializer {
                 }
                 RaceHandler.applyRaceAttributes(newPlayer, raceId);
                 ManaHandler.sync(newPlayer);
-                ManaHandler.sync(newPlayer);
                 RaceSyncPayload.sendTo(newPlayer, raceId);
                 syncRaceToAllPlayers(newPlayer, raceId);
                 LOGGER.info("Restored race {} for {} after respawn", raceId, newPlayer.getName().getString());
@@ -153,10 +149,6 @@ public class GreewsRaces implements ModInitializer {
             for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
                 World world = player.getEntityWorld();
                 if (!(world instanceof ServerWorld serverWorld)) continue;
-
-                if (ManaHandler.isFairy(player)) {
-                    ManaHandler.regenerateOneTenth(player);
-                }
 
                 if (ManaHandler.isFairy(player)) {
                     ManaHandler.regenerateOneTenth(player);
