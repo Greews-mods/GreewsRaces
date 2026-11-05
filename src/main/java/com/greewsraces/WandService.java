@@ -36,6 +36,9 @@ public final class WandService {
 
         LAST_CAST_TICK.put(player.getUuid(), now);
         SnowballEntity projectile = new SnowballEntity(world, player, new ItemStack(orb));
+        Vec3d direction = player.getRotationVec(1.0f);
+        Vec3d start = player.getCameraPosVec(1.0f).add(direction.multiply(0.35));
+        projectile.setPosition(start.x, start.y, start.z);
         projectile.setVelocity(player, player.getPitch(), player.getYaw(), 0.0f, 1.6f, 0.0f);
         if (!world.spawnEntity(projectile)) {
             for (int i = 0; i < ManaHandler.CAST_COST_TENTHS; i++) ManaHandler.regenerateOneTenth(player);
@@ -43,10 +46,8 @@ public final class WandService {
             return;
         }
 
-        Vec3d direction = player.getRotationVec(1.0f);
-        Vec3d start = player.getCameraPosVec(1.0f);
         for (int i = 1; i <= 4; i++) {
-            Vec3d particlePos = start.add(direction.multiply(i * 0.35));
+            Vec3d particlePos = start.add(direction.multiply(i * 0.2));
             world.spawnParticles(ParticleTypes.END_ROD, particlePos.x, particlePos.y, particlePos.z,
                 1, 0.015, 0.015, 0.015, 0.0);
         }
