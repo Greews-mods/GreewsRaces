@@ -42,6 +42,9 @@ Use a **Java version equal or higher** than listed. The mod JAR declares require
 
 ### Fixes / compatibility
 
+- **1.2.3-Beta startup fix:** wand and orb item registry keys are now assigned before construction, preventing the `Item id not set` crash reported on 1.21.10.
+- **Fairy mana and wands:** saved 10-point mana pool regenerates 0.1 per second; six colored-orb wand tiers cost 1 mana and scale damage by tier.
+
 - Build version **1.2.2-Beta**: generated and packaged the Mixin refmap required by the production damage hooks; kept race-scaled bodies while restoring vanilla first-person camera height.
 - Fairy is half her former size, can toggle flight with a double jump, keeps leather armor and reach bonuses, and has no trident bonus or axe/pickaxe penalties.
 
