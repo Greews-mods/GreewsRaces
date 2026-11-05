@@ -1,0 +1,16 @@
+{
+  "item.greewsraces.wood_wand": "Wood Wand",
+  "item.greewsraces.copper_wand": "Copper Wand",
+  "item.greewsraces.iron_wand": "Iron Wand",
+  "item.greewsraces.gold_wand": "Gold Wand",
+  "item.greewsraces.diamond_wand": "Diamond Wand",
+  "item.greewsraces.netherite_wand": "Netherite Wand",
+  "item.greewsraces.orb_wood": "Wood Magic Orb",
+  "item.greewsraces.orb_copper": "Copper Magic Orb",
+  "item.greewsraces.orb_iron": "Iron Magic Orb",
+  "item.greewsraces.orb_gold": "Gold Magic Orb",
+  "item.greewsraces.orb_diamond": "Diamond Magic Orb",
+  "item.greewsraces.orb_netherite": "Netherite Magic Orb",
+  "message.greewsraces.wand.fairy_only": "Only fairies can use wands.",
+  "message.greewsraces.mana.empty": "Not enough mana!"
+}

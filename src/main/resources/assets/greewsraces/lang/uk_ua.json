@@ -1,0 +1,16 @@
+{
+  "item.greewsraces.wood_wand": "Дерев'яна чарівна паличка",
+  "item.greewsraces.copper_wand": "Мідна чарівна паличка",
+  "item.greewsraces.iron_wand": "Залізна чарівна паличка",
+  "item.greewsraces.gold_wand": "Золота чарівна паличка",
+  "item.greewsraces.diamond_wand": "Діамантова чарівна паличка",
+  "item.greewsraces.netherite_wand": "Незеритова чарівна паличка",
+  "item.greewsraces.orb_wood": "Дерев'яна магічна сфера",
+  "item.greewsraces.orb_copper": "Мідна магічна сфера",
+  "item.greewsraces.orb_iron": "Залізна магічна сфера",
+  "item.greewsraces.orb_gold": "Золота магічна сфера",
+  "item.greewsraces.orb_diamond": "Діамантова магічна сфера",
+  "item.greewsraces.orb_netherite": "Незеритова магічна сфера",
+  "message.greewsraces.wand.fairy_only": "Чарівними паличками можуть користуватися лише феї.",
+  "message.greewsraces.mana.empty": "Недостатньо мани!"
+}

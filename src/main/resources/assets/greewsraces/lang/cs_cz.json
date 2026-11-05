@@ -1,0 +1,16 @@
+{
+  "item.greewsraces.wood_wand": "Dřevěná hůlka",
+  "item.greewsraces.copper_wand": "Měděná hůlka",
+  "item.greewsraces.iron_wand": "Železná hůlka",
+  "item.greewsraces.gold_wand": "Zlatá hůlka",
+  "item.greewsraces.diamond_wand": "Diamantová hůlka",
+  "item.greewsraces.netherite_wand": "Netheritová hůlka",
+  "item.greewsraces.orb_wood": "Dřevěná magická koule",
+  "item.greewsraces.orb_copper": "Měděná magická koule",
+  "item.greewsraces.orb_iron": "Železná magická koule",
+  "item.greewsraces.orb_gold": "Zlatá magická koule",
+  "item.greewsraces.orb_diamond": "Diamantová magická koule",
+  "item.greewsraces.orb_netherite": "Netheritová magická koule",
+  "message.greewsraces.wand.fairy_only": "Hůlky mohou používat pouze víly.",
+  "message.greewsraces.mana.empty": "Nemáš dostatek many!"
+}

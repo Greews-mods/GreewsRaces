@@ -1,0 +1,16 @@
+{
+  "item.greewsraces.wood_wand": "Varita de madera",
+  "item.greewsraces.copper_wand": "Varita de cobre",
+  "item.greewsraces.iron_wand": "Varita de hierro",
+  "item.greewsraces.gold_wand": "Varita de oro",
+  "item.greewsraces.diamond_wand": "Varita de diamante",
+  "item.greewsraces.netherite_wand": "Varita de netherita",
+  "item.greewsraces.orb_wood": "Orbe mágico de madera",
+  "item.greewsraces.orb_copper": "Orbe mágico de cobre",
+  "item.greewsraces.orb_iron": "Orbe mágico de hierro",
+  "item.greewsraces.orb_gold": "Orbe mágico de oro",
+  "item.greewsraces.orb_diamond": "Orbe mágico de diamante",
+  "item.greewsraces.orb_netherite": "Orbe mágico de netherita",
+  "message.greewsraces.wand.fairy_only": "Solo las hadas pueden usar varitas.",
+  "message.greewsraces.mana.empty": "¡No tienes suficiente maná!"
+}

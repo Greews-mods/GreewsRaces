@@ -4,7 +4,9 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.text.Text;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class GreewsRacesClient implements ClientModInitializer {
@@ -16,6 +18,11 @@ public class GreewsRacesClient implements ClientModInitializer {
     public void onInitializeClient() {
         ClientConfig.load();
         GreewsRaces.LOGGER.info("GreewsRaces client initialized!");
+
+        ClientPlayNetworking.registerGlobalReceiver(ManaSyncPayload.ID, (payload, context) ->
+            context.client().execute(() -> ClientManaStorage.setManaTenths(payload.manaTenths())));
+
+        HudRenderCallback.EVENT.register((context, tickCounter) -> renderManaBar(context));
 
         ClientPlayNetworking.registerGlobalReceiver(RacesConfigSyncPayload.ID, (payload, context) -> {
             context.client().execute(() -> {
@@ -87,6 +94,7 @@ public class GreewsRacesClient implements ClientModInitializer {
         ClientPlayConnectionEvents.DISCONNECT.register((handler, client) -> {
             ClientRaceStorage.clear();
             ClientLanguageStorage.clear();
+            ClientManaStorage.reset();
             resetSync();
             GreewsRaces.LOGGER.info("Cleared client storage on disconnect");
         });
@@ -111,6 +119,33 @@ public class GreewsRacesClient implements ClientModInitializer {
                 }
             }
         });
+    }
+
+    private static void renderManaBar(net.minecraft.client.gui.DrawContext context) {
+        MinecraftClient client = MinecraftClient.getInstance();
+        if (client.player == null || client.options.hudHidden
+            || !"fairy".equals(ClientRaceStorage.getRace(client.player.getUuid()))) {
+            return;
+        }
+
+        int width = 81;
+        int height = 7;
+        int x = context.getScaledWindowWidth() / 2 + 10;
+        int y = context.getScaledWindowHeight() - 39;
+        int mana = ClientManaStorage.getManaTenths();
+        int filledWidth = width * mana / ManaHandler.MAX_MANA_TENTHS;
+
+        context.fill(x - 1, y - 1, x + width + 1, y + height + 1, 0xFF101820);
+        context.fill(x, y, x + width, y + height, 0xFF172C45);
+        if (filledWidth > 0) {
+            context.fill(x, y, x + filledWidth, y + height, 0xFF268CFF);
+        }
+
+        int whole = mana / 10;
+        int remainder = mana % 10;
+        String amount = remainder == 0 ? whole + "/10" : whole + "." + remainder + "/10";
+        int textX = x + (width - client.textRenderer.getWidth(amount)) / 2;
+        context.drawText(client.textRenderer, Text.literal(amount), textX, y - 1, 0xFFFFFFFF, true);
     }
 
     private static void schedulePostLoginFlow() {

@@ -26,6 +26,7 @@ public class GreewsRaces implements ModInitializer {
         LOGGER.info("GreewsRaces mod initialized!");
 
         SpawnGroupHandler.register();
+        WandItems.register();
 
         PayloadTypeRegistry.playC2S().register(RaceSelectionPayload.ID, RaceSelectionPayload.CODEC);
         PayloadTypeRegistry.playC2S().register(LanguageSelectionPayload.ID, LanguageSelectionPayload.CODEC);
@@ -34,6 +35,7 @@ public class GreewsRaces implements ModInitializer {
         PayloadTypeRegistry.playS2C().register(PlayerLanguageSyncPayload.ID, PlayerLanguageSyncPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(RacesConfigSyncPayload.ID, RacesConfigSyncPayload.CODEC);
         PayloadTypeRegistry.playS2C().register(OpenGuiPayload.ID, OpenGuiPayload.CODEC);
+        PayloadTypeRegistry.playS2C().register(ManaSyncPayload.ID, ManaSyncPayload.CODEC);
 
         ServerPlayNetworking.registerGlobalReceiver(RaceSelectionPayload.ID, (payload, context) -> {
             context.server().execute(() -> {
@@ -53,6 +55,7 @@ public class GreewsRaces implements ModInitializer {
                     LOGGER.info("Player {} selected race: {}", player.getName().getString(), payload.raceId());
 
                     ServerPlayNetworking.send(player, new RaceSyncPayload(payload.raceId()));
+                    ManaHandler.sync(player);
 
                     syncRaceToNearbyPlayers(player, payload.raceId());
                 }
@@ -100,6 +103,7 @@ public class GreewsRaces implements ModInitializer {
                     ServerConfig.enabledRaceIds(),
                     ServerConfig.get().generateEvernightBiome
                 ));
+                ManaHandler.sync(player);
                 ServerPlayNetworking.send(player, new RaceSyncPayload(raceId != null ? raceId : ""));
                 ServerPlayNetworking.send(player, new PlayerLanguageSyncPayload(player.getUuid(), languageCode != null ? languageCode : ""));
 
@@ -130,6 +134,7 @@ public class GreewsRaces implements ModInitializer {
                     state.setRace(newPlayer.getUuid(), raceId);
                 }
                 RaceHandler.applyRaceAttributes(newPlayer, raceId);
+                ManaHandler.sync(newPlayer);
                 ServerPlayNetworking.send(newPlayer, new RaceSyncPayload(raceId));
                 syncRaceToAllPlayers(newPlayer, raceId);
                 LOGGER.info("Restored race {} for {} after respawn", raceId, newPlayer.getName().getString());
@@ -150,6 +155,10 @@ public class GreewsRaces implements ModInitializer {
             for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
                 World world = player.getEntityWorld();
                 if (!(world instanceof ServerWorld serverWorld)) continue;
+
+                if (ManaHandler.isFairy(player)) {
+                    ManaHandler.regenerateOneTenth(player);
+                }
 
                 GreewsWorldState state = GreewsWorldState.get(serverWorld);
                 String raceId = state.getRace(player.getUuid());

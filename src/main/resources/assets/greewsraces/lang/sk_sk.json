@@ -1,0 +1,16 @@
+{
+  "item.greewsraces.wood_wand": "Drevená palička",
+  "item.greewsraces.copper_wand": "Medená palička",
+  "item.greewsraces.iron_wand": "Železná palička",
+  "item.greewsraces.gold_wand": "Zlatá palička",
+  "item.greewsraces.diamond_wand": "Diamantová palička",
+  "item.greewsraces.netherite_wand": "Netheritová palička",
+  "item.greewsraces.orb_wood": "Drevená magická guľa",
+  "item.greewsraces.orb_copper": "Medená magická guľa",
+  "item.greewsraces.orb_iron": "Železná magická guľa",
+  "item.greewsraces.orb_gold": "Zlatá magická guľa",
+  "item.greewsraces.orb_diamond": "Diamantová magická guľa",
+  "item.greewsraces.orb_netherite": "Netheritová magická guľa",
+  "message.greewsraces.wand.fairy_only": "Paličky môžu používať iba víly.",
+  "message.greewsraces.mana.empty": "Nemáš dosť many!"
+}

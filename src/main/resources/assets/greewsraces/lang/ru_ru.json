@@ -1,0 +1,16 @@
+{
+  "item.greewsraces.wood_wand": "Деревянная волшебная палочка",
+  "item.greewsraces.copper_wand": "Медная волшебная палочка",
+  "item.greewsraces.iron_wand": "Железная волшебная палочка",
+  "item.greewsraces.gold_wand": "Золотая волшебная палочка",
+  "item.greewsraces.diamond_wand": "Алмазная волшебная палочка",
+  "item.greewsraces.netherite_wand": "Незеритовая волшебная палочка",
+  "item.greewsraces.orb_wood": "Деревянная магическая сфера",
+  "item.greewsraces.orb_copper": "Медная магическая сфера",
+  "item.greewsraces.orb_iron": "Железная магическая сфера",
+  "item.greewsraces.orb_gold": "Золотая магическая сфера",
+  "item.greewsraces.orb_diamond": "Алмазная магическая сфера",
+  "item.greewsraces.orb_netherite": "Незеритовая магическая сфера",
+  "message.greewsraces.wand.fairy_only": "Волшебными палочками могут пользоваться только феи.",
+  "message.greewsraces.mana.empty": "Недостаточно маны!"
+}
