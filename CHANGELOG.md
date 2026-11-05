@@ -59,6 +59,7 @@ Use a **Java version equal or higher** than listed. The mod JAR declares require
 
 ### Fixes / compatibility
 
+- Build version **1.2.1-Beta**: packaged the Mixin refmap for weapon damage hooks, restored vanilla first-person camera height while keeping race body scale, and reworked Fairy size/flight/weapon effects. Fairy is 50% of her previous size, can double-jump to toggle flight, retains her leather armor and reach bonuses, and has no trident bonus or axe/pickaxe penalties.
 - **Mixin compatibility** set to **`JAVA_17`** in `greewsraces.mixins.json` so the mod loads on a **Java 17** runtime (Java 21–only mixin level caused startup failure on Java 17).
 - **Evernight biome** uses the same **`carvers`: `{ "air": [] }`** object shape as vanilla 1.20.1 (not a bare empty array).
 - **Client config:** **`showRaceTabPrefix`**; tab list mixin respects it.

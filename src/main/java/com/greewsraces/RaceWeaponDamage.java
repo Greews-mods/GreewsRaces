@@ -102,10 +102,7 @@ public final class RaceWeaponDamage {
                 default -> 1.0f;
             };
             case VAMPIRE -> isWeapon(cat) ? BONUS : 1.0f;
-            case FAIRY -> switch (cat) {
-                case AXE, PICKAXE -> PENALTY;
-                default -> 1.0f;
-            };
+            case FAIRY -> 1.0f;
             default -> 1.0f;
         };
     }

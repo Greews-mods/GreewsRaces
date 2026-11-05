@@ -4,6 +4,7 @@ import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ public class RaceHandler {
         Race race = Race.fromId(raceId);
 
         resetAttributes(player);
+        updateFairyFlight(player, race == Race.FAIRY);
 
         EntityAttributeInstance healthAttr = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
         if (healthAttr != null && race.getMaxHealth() != 20.0) {
@@ -59,6 +61,7 @@ public class RaceHandler {
     }
 
     public static void resetAttributes(PlayerEntity player) {
+        updateFairyFlight(player, false);
         EntityAttributeInstance healthAttr = player.getAttributeInstance(EntityAttributes.GENERIC_MAX_HEALTH);
         if (healthAttr != null) {
             healthAttr.removeModifier(HEALTH_UUID);
@@ -79,5 +82,19 @@ public class RaceHandler {
         }
 
         player.calculateDimensions();
+    }
+
+    private static void updateFairyFlight(PlayerEntity player, boolean fairy) {
+        var abilities = player.getAbilities();
+        if (fairy) {
+            abilities.allowFlying = true;
+        } else if (!player.isCreative() && !player.isSpectator()) {
+            abilities.allowFlying = false;
+            abilities.flying = false;
+        }
+
+        if (player instanceof ServerPlayerEntity serverPlayer) {
+            serverPlayer.sendAbilitiesUpdate();
+        }
     }
 }
