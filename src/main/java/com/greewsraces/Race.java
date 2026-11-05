@@ -90,15 +90,15 @@ public enum Race {
     ),
 
     FAIRY("Víla",
-        0.7,
+        0.35,
         1.1,
         1.0,
         20.0,
         0.0,
         0xFF69B4,
         "Lehká bytost přírody",
-        "+10% rychlost pohybu\n+20% poškození s tridentem\n+50% brnění z kožené zbroje\n+20% dosah",
-        "-30% výška\n-20% poškození se sekerou\n-20% poškození s krumpáčem"
+        "+10% rychlost pohybu\n+50% brnění z kožené zbroje\n+20% dosah\nTrvalé létání (dvojitým skokem zapnout/vypnout)",
+        "-65% výška"
     );
 
     private final String displayName;
