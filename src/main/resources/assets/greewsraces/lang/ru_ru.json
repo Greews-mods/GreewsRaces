@@ -12,5 +12,10 @@
   "item.greewsraces.orb_diamond": "Алмазная магическая сфера",
   "item.greewsraces.orb_netherite": "Незеритовая магическая сфера",
   "message.greewsraces.wand.fairy_only": "Волшебными палочками могут пользоваться только феи.",
-  "message.greewsraces.mana.empty": "Недостаточно маны!"
+  "message.greewsraces.mana.empty": "Недостаточно маны!",
+  "tooltip.greewsraces.category": "Инструменты и утилиты",
+  "tooltip.greewsraces.brand": "Greews Races",
+  "tooltip.greewsraces.mana": "Расход маны: %s",
+  "tooltip.greewsraces.damage": "Урон снаряда: %s",
+  "tooltip.greewsraces.fairy_only": "Только для фей"
 }

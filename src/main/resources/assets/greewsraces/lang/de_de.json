@@ -12,5 +12,10 @@
   "item.greewsraces.orb_diamond": "Diamantmagiekugel",
   "item.greewsraces.orb_netherite": "Netheritmagiekugel",
   "message.greewsraces.wand.fairy_only": "Nur Feen können Zauberstäbe benutzen.",
-  "message.greewsraces.mana.empty": "Nicht genug Mana!"
+  "message.greewsraces.mana.empty": "Nicht genug Mana!",
+  "tooltip.greewsraces.category": "Werkzeuge & Hilfsmittel",
+  "tooltip.greewsraces.brand": "Greews Races",
+  "tooltip.greewsraces.mana": "Manaverbrauch: %s",
+  "tooltip.greewsraces.damage": "Projektilschaden: %s",
+  "tooltip.greewsraces.fairy_only": "Nur für Feen verwendbar"
 }

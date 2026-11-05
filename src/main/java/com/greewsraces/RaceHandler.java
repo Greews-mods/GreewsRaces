@@ -88,6 +88,7 @@ public class RaceHandler {
         var abilities = player.getAbilities();
         if (fairy) {
             abilities.allowFlying = true;
+            abilities.flying = false;
         } else if (!player.isCreative() && !player.isSpectator()) {
             abilities.allowFlying = false;
             abilities.flying = false;

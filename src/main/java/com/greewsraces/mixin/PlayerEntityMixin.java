@@ -2,11 +2,9 @@ package com.greewsraces.mixin;
 
 import com.greewsraces.*;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.MutableText;
@@ -167,53 +165,13 @@ public abstract class PlayerEntityMixin {
 
             // === VÃLA â bonus brnÄnÃ­ z koÅ¾enÃ© zbroje ===
             // PÅepoÄÃ­tÃ¡vÃ¡me kaÅ¾dÃ½ch 20 tickÅ¯ (1 sekunda) aby nedochÃ¡zelo k problÃ©mÅ¯m
-            if (race == Race.FAIRY && player.age % 20 == 0) {
-                applyFairyLeatherArmorBonus(player);
-            }
-        }
-    }
-
-    /**
-     * VÃ­la: +20% brnÄnÃ­ za kaÅ¾dÃ½ kus koÅ¾enÃ© zbroje.
-     * MC 1.21.10: getEquippedStack(EquipmentSlot) mÃ­sto getArmorItems()
-     */
-    private void applyFairyLeatherArmorBonus(PlayerEntity player) {
-        EquipmentSlot[] armorSlots = {
-            EquipmentSlot.HEAD,
-            EquipmentSlot.CHEST,
-            EquipmentSlot.LEGS,
-            EquipmentSlot.FEET
-        };
-
-        int leatherPieces = 0;
-        for (EquipmentSlot slot : armorSlots) {
-            ItemStack piece = player.getEquippedStack(slot);
-            if (!piece.isEmpty()) {
-                String itemId = net.minecraft.registry.Registries.ITEM
-                    .getId(piece.getItem()).toString();
-                if (itemId.contains("leather")) {
-                    leatherPieces++;
+            if (race == Race.FAIRY && player.isOnGround() && player.getAbilities().flying) {
+                player.getAbilities().flying = false;
+                if (player instanceof net.minecraft.server.network.ServerPlayerEntity serverPlayer) {
+                    serverPlayer.sendAbilitiesUpdate();
                 }
             }
         }
-
-        var armorAttr = player.getAttributeInstance(
-            net.minecraft.entity.attribute.EntityAttributes.GENERIC_ARMOR);
-        if (armorAttr != null) {
-            java.util.UUID leatherUuid = java.util.UUID.fromString("7c2f5a1e-4b9d-4c3e-a1f2-9e8d7c6b5a40");
-            armorAttr.removeModifier(leatherUuid);
-
-            if (leatherPieces > 0) {
-                double bonus = leatherPieces * 1.0;
-                net.minecraft.entity.attribute.EntityAttributeModifier leatherMod =
-                    new net.minecraft.entity.attribute.EntityAttributeModifier(
-                        leatherUuid,
-                        "greewsraces_fairy_leather",
-                        bonus,
-                        net.minecraft.entity.attribute.EntityAttributeModifier.Operation.ADDITION
-                    );
-                armorAttr.addTemporaryModifier(leatherMod);
-            }
-        }
     }
+
 }
