@@ -17,7 +17,7 @@ public abstract class FairyFoodHudMixin {
     private int greewsraces$moveFoodBarToArmorRow(int top) {
         MinecraftClient client = MinecraftClient.getInstance();
         if (client.player != null && "fairy".equals(ClientRaceStorage.getRace(client.player.getUuid()))) {
-            return top - 10;
+            return top - (client.player.isSubmergedInWater() ? 0 : 10);
         }
         return top;
     }

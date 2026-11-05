@@ -133,7 +133,7 @@ public class GreewsRacesClient implements ClientModInitializer {
             || !"fairy".equals(ClientRaceStorage.getRace(client.player.getUuid()))) return;
         int width = 81, height = 7;
         int x = context.getScaledWindowWidth() / 2 + 10;
-        int y = context.getScaledWindowHeight() - 39;
+        int y = context.getScaledWindowHeight() - (client.player.isSubmergedInWater() ? 29 : 39);
         int mana = ClientManaStorage.getManaTenths();
         int fill = width * mana / ManaHandler.MAX_MANA_TENTHS;
         context.fill(x - 1, y - 1, x + width + 1, y + height + 1, 0xFF101820);
